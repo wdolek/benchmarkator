@@ -3,8 +3,6 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using Allocator.Data;
 using BenchmarkDotNet.Attributes;
@@ -54,7 +52,7 @@ namespace Allocator.Benchmarks
         [Benchmark(Description = "L: stream")]
         public async Task DeserializeLargeStream()
         {
-            using (var streamReader = InitStreamReaderWithoutClosing(await _response.Content.ReadAsStreamAsync()))
+            using (var streamReader = new StreamReader(await _response.Content.ReadAsStreamAsync()))
             using (var jsonReader = new JsonTextReader(streamReader))
             {
                 _serializer.Deserialize<MediumData[]>(jsonReader);
@@ -75,7 +73,7 @@ namespace Allocator.Benchmarks
         [Benchmark(Description = "M: stream")]
         public async Task DeserializeMediumStream()
         {
-            using (var streamReader = InitStreamReaderWithoutClosing(await _response.Content.ReadAsStreamAsync()))
+            using (var streamReader = new StreamReader(await _response.Content.ReadAsStreamAsync()))
             using (var jsonReader = new JsonTextReader(streamReader))
             {
                 _serializer.Deserialize<MediumData>(jsonReader);
@@ -96,7 +94,7 @@ namespace Allocator.Benchmarks
         [Benchmark(Description = "S: stream")]
         public async Task DeserializeSmallStream()
         {
-            using (var streamReader = InitStreamReaderWithoutClosing(await _response.Content.ReadAsStreamAsync()))
+            using (var streamReader = new StreamReader(await _response.Content.ReadAsStreamAsync()))
             using (var jsonReader = new JsonTextReader(streamReader))
             {
                 _serializer.Deserialize<SmallData>(jsonReader);
@@ -111,10 +109,6 @@ namespace Allocator.Benchmarks
         }
 
         #endregion
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static StreamReader InitStreamReaderWithoutClosing(Stream inputStream) =>
-            new StreamReader(inputStream, Encoding.UTF8, true, 1024, true);
 
         public HttpResponseMessage InitFromResource(string resourceName)
         {
