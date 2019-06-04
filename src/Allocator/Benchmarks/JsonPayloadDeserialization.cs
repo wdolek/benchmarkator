@@ -24,9 +24,8 @@ namespace Allocator.Benchmarks
     [GenericTypeArguments(typeof(MediumData[]))]
     public class JsonPayloadDeserialization<T>
     {
-        private const int RepeatsWithinIteration = 100;
-
         private readonly JsonSerializer _serializer = JsonSerializer.CreateDefault();
+
         private readonly Dictionary<Type, string> _resourceMapping = new Dictionary<Type, string>
         {
             [typeof(SmallData)] = "Allocator.Data.S.json",
@@ -34,8 +33,16 @@ namespace Allocator.Benchmarks
             [typeof(MediumData[])] = "Allocator.Data.L.json",
         };
 
+        private readonly Dictionary<Type, int> _repeatMapping = new Dictionary<Type, int>
+        {
+            [typeof(SmallData)] = 100_000,
+            [typeof(MediumData)] = 10_000,
+            [typeof(MediumData[])] = 100,
+        };
+
         private MemoryStream _memory;
         private HttpResponseMessage _response;
+        private int _iterationRepeats;
 
         [GlobalSetup]
         public void GlobalSetup()
@@ -48,12 +55,13 @@ namespace Allocator.Benchmarks
             }
 
             _response = BuildResponse(_memory);
+            _iterationRepeats = _repeatMapping[typeof(T)];
         }
 
         [Benchmark(Description = "Stream d13n")]
         public async Task DeserializeLargeStream()
         {
-            for (var i = 0; i < RepeatsWithinIteration; i++)
+            for (var i = 0; i < _iterationRepeats; i++)
             {
                 _memory.Seek(0, SeekOrigin.Begin);
 
@@ -68,7 +76,7 @@ namespace Allocator.Benchmarks
         [Benchmark(Description = "String d13n")]
         public async Task DeserializeLargeString()
         {
-            for (var i = 0; i < RepeatsWithinIteration; i++)
+            for (var i = 0; i < _iterationRepeats; i++)
             {
                 _memory.Seek(0, SeekOrigin.Begin);
 
