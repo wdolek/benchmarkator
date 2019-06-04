@@ -1,129 +1,95 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Text;
 using System.Threading.Tasks;
 using Allocator.Data;
 using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Engines;
 using BenchmarkDotNet.Order;
 using Newtonsoft.Json;
 
 namespace Allocator.Benchmarks
 {
+    [SimpleJob(RunStrategy.ColdStart)]
     [MemoryDiagnoser]
-    [StopOnFirstError]
     [Orderer(SummaryOrderPolicy.FastestToSlowest)]
-    public class JsonPayloadDeserialization
+    [GenericTypeArguments(typeof(SmallData))]
+    [GenericTypeArguments(typeof(MediumData))]
+    [GenericTypeArguments(typeof(MediumData[]))]
+    public class JsonPayloadDeserialization<T>
     {
+        private const int RepeatsWithinIteration = 100;
+
         private readonly JsonSerializer _serializer = JsonSerializer.CreateDefault();
+        private readonly Dictionary<Type, string> _resourceMapping = new Dictionary<Type, string>
+        {
+            [typeof(SmallData)] = "Allocator.Data.S.json",
+            [typeof(MediumData)] = "Allocator.Data.M.json",
+            [typeof(MediumData[])] = "Allocator.Data.L.json",
+        };
+
+        private MemoryStream _memory;
         private HttpResponseMessage _response;
 
-        #region Setup & Cleanup
-
-        [IterationSetup(Targets = new[] { nameof(DeserializeLargeStream), nameof(DeserializeLargeString) })]
-        public void HugeGlobalSetup()
+        [GlobalSetup]
+        public void GlobalSetup()
         {
-            _response = InitFromResource("Allocator.Data.L.json");
+            var resourceName = _resourceMapping[typeof(T)];
+            using (var resourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
+            {
+                _memory = new MemoryStream();
+                resourceStream.CopyTo(_memory);
+            }
+
+            _response = BuildResponse(_memory);
         }
 
-        [IterationSetup(Targets = new[] { nameof(DeserializeMediumStream), nameof(DeserializeMediumString) })]
-        public void MediumGlobalSetup()
-        {
-            _response = InitFromResource("Allocator.Data.M.json");
-        }
-
-        [IterationSetup(Targets = new[] { nameof(DeserializeSmallStream), nameof(DeserializeSmallString) })]
-        public void SmallGlobalSetup()
-        {
-            _response = InitFromResource("Allocator.Data.S.json");
-        }
-
-        [IterationCleanup]
-        public void MediumGlobalCleanup()
-        {
-            _response?.Dispose();
-        }
-
-        #endregion
-
-        #region Large
-
-        [Benchmark(Description = "L: stream")]
+        [Benchmark(Description = "Stream d13n")]
         public async Task DeserializeLargeStream()
         {
-            using (var streamReader = new StreamReader(await _response.Content.ReadAsStreamAsync()))
-            using (var jsonReader = new JsonTextReader(streamReader))
+            for (var i = 0; i < RepeatsWithinIteration; i++)
             {
-                _serializer.Deserialize<MediumData[]>(jsonReader);
+                _memory.Seek(0, SeekOrigin.Begin);
+
+                using (var streamReader = BuildNonClosingStreamReader(await _response.Content.ReadAsStreamAsync()))
+                using (var jsonReader = new JsonTextReader(streamReader))
+                {
+                    _serializer.Deserialize<T>(jsonReader);
+                }
             }
         }
 
-        [Benchmark(Description = "L: string")]
+        [Benchmark(Description = "String d13n")]
         public async Task DeserializeLargeString()
         {
-            var content = await _response.Content.ReadAsStringAsync();
-            JsonConvert.DeserializeObject<MediumData[]>(content);
-        }
-
-        #endregion
-
-        #region Medium
-
-        [Benchmark(Description = "M: stream")]
-        public async Task DeserializeMediumStream()
-        {
-            using (var streamReader = new StreamReader(await _response.Content.ReadAsStreamAsync()))
-            using (var jsonReader = new JsonTextReader(streamReader))
+            for (var i = 0; i < RepeatsWithinIteration; i++)
             {
-                _serializer.Deserialize<MediumData>(jsonReader);
+                _memory.Seek(0, SeekOrigin.Begin);
+
+                var content = await _response.Content.ReadAsStringAsync();
+                JsonConvert.DeserializeObject<T>(content);
             }
         }
 
-        [Benchmark(Description = "M: string")]
-        public async Task DeserializeMediumString()
+        private static HttpResponseMessage BuildResponse(Stream stream)
         {
-            var content = await _response.Content.ReadAsStringAsync();
-            JsonConvert.DeserializeObject<MediumData>(content);
-        }
+            var content = new StreamContent(stream);
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-        #endregion
-
-        #region Small
-
-        [Benchmark(Description = "S: stream")]
-        public async Task DeserializeSmallStream()
-        {
-            using (var streamReader = new StreamReader(await _response.Content.ReadAsStreamAsync()))
-            using (var jsonReader = new JsonTextReader(streamReader))
+            return new HttpResponseMessage(HttpStatusCode.OK)
             {
-                _serializer.Deserialize<SmallData>(jsonReader);
-            }
+                Content = content
+            };
         }
 
-        [Benchmark(Description = "S: string")]
-        public async Task DeserializeSmallString()
-        {
-            var content = await _response.Content.ReadAsStringAsync();
-            JsonConvert.DeserializeObject<SmallData>(content);
-        }
-
-        #endregion
-
-        public HttpResponseMessage InitFromResource(string resourceName)
-        {
-            using (var resourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
-            using (var streamReader = new StreamReader(resourceStream))
-            {
-                // nah. we don't really care how it was initialized
-                var content = new StringContent(streamReader.ReadToEnd());
-                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
-                return new HttpResponseMessage(HttpStatusCode.OK)
-                {
-                    Content = content
-                };
-            }
-        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static StreamReader BuildNonClosingStreamReader(Stream inputStream) =>
+            new StreamReader(inputStream, Encoding.UTF8, true, 1024, true);
     }
 }

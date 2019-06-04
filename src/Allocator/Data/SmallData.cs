@@ -2,10 +2,10 @@
 
 namespace Allocator.Data
 {
-    class SmallData
+    public class SmallData
     {
         [JsonProperty("_id")]
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public string Id { get; set; }
+        public string Guid { get; set; }
     }
 }

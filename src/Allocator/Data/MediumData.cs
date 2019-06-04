@@ -2,7 +2,7 @@
 
 namespace Allocator.Data
 {
-    class MediumData
+    public class MediumData
     {
         [JsonProperty("_id")]
         public string Id { get; set; }
