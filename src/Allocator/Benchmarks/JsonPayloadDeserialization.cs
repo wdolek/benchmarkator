@@ -35,13 +35,12 @@ namespace Allocator.Benchmarks
 
         private readonly Dictionary<Type, int> _repeatMapping = new Dictionary<Type, int>
         {
-            [typeof(SmallData)] = 100_000,
-            [typeof(MediumData)] = 10_000,
+            [typeof(SmallData)] = 10000,
+            [typeof(MediumData)] = 1000,
             [typeof(MediumData[])] = 100,
         };
 
         private MemoryStream _memory;
-        private HttpResponseMessage _response;
         private int _iterationRepeats;
 
         [GlobalSetup]
@@ -54,7 +53,6 @@ namespace Allocator.Benchmarks
                 resourceStream.CopyTo(_memory);
             }
 
-            _response = BuildResponse(_memory);
             _iterationRepeats = _repeatMapping[typeof(T)];
         }
 
@@ -63,9 +61,9 @@ namespace Allocator.Benchmarks
         {
             for (var i = 0; i < _iterationRepeats; i++)
             {
-                _memory.Seek(0, SeekOrigin.Begin);
+                var response = BuildResponse(_memory);
 
-                using (var streamReader = BuildNonClosingStreamReader(await _response.Content.ReadAsStreamAsync()))
+                using (var streamReader = BuildNonClosingStreamReader(await response.Content.ReadAsStreamAsync()))
                 using (var jsonReader = new JsonTextReader(streamReader))
                 {
                     _serializer.Deserialize<T>(jsonReader);
@@ -78,15 +76,17 @@ namespace Allocator.Benchmarks
         {
             for (var i = 0; i < _iterationRepeats; i++)
             {
-                _memory.Seek(0, SeekOrigin.Begin);
+                var response = BuildResponse(_memory);
 
-                var content = await _response.Content.ReadAsStringAsync();
+                var content = await response.Content.ReadAsStringAsync();
                 JsonConvert.DeserializeObject<T>(content);
             }
         }
 
         private static HttpResponseMessage BuildResponse(Stream stream)
         {
+            stream.Seek(0, SeekOrigin.Begin);
+
             var content = new StreamContent(stream);
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
@@ -98,6 +98,11 @@ namespace Allocator.Benchmarks
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static StreamReader BuildNonClosingStreamReader(Stream inputStream) =>
-            new StreamReader(inputStream, Encoding.UTF8, true, 1024, true);
+            new StreamReader(
+                stream: inputStream,
+                encoding: Encoding.UTF8,
+                detectEncodingFromByteOrderMarks: true,
+                bufferSize: 1024,
+                leaveOpen: true);
     }
 }

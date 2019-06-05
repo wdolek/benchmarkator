@@ -4,6 +4,10 @@
 
 Should you read string data and then deserialize or deserialize response stream right away?
 
+Deserialization is run multiple times for each iteration (to avoid short runs).
+Number of repeats per iteration differs per input size (small input is repeated more than large input),
+see [JsonPayloadDeserialization.cs](src/Allocator/Benchmarks/JsonPayloadDeserialization.cs) for details.
+
 Reading:
 - [Newtonsoft.Json Performance Tips](https://www.newtonsoft.com/json/help/html/Performance.htm)
 
@@ -17,15 +21,15 @@ BenchmarkDotNet=v0.11.5, OS=Windows 10.0.17763.529 (1809/October2018Update/Redst
 Intel Core i7-7820HQ CPU 2.90GHz (Kaby Lake), 1 CPU, 8 logical and 4 physical cores
 .NET Core SDK=2.2.104
   [Host]     : .NET Core 2.2.2 (CoreCLR 4.6.27317.07, CoreFX 4.6.27318.02), 64bit RyuJIT
-  Job-YNKLGM : .NET Core 2.2.2 (CoreCLR 4.6.27317.07, CoreFX 4.6.27318.02), 64bit RyuJIT
+  Job-UOCDUS : .NET Core 2.2.2 (CoreCLR 4.6.27317.07, CoreFX 4.6.27318.02), 64bit RyuJIT
 
 RunStrategy=ColdStart  
 
 ```
-|        Method |     Mean |    Error |   StdDev |       Gen 0 | Gen 1 | Gen 2 | Allocated |
-|-------------- |---------:|---------:|---------:|------------:|------:|------:|----------:|
-| &#39;Stream d13n&#39; | 190.3 ms | 6.570 ms | 19.37 ms | 138000.0000 |     - |     - | 553.89 MB |
-| &#39;String d13n&#39; | 205.6 ms | 5.110 ms | 15.07 ms |  72000.0000 |     - |     - | 288.39 MB |
+|        Method |     Mean |    Error |   StdDev |      Gen 0 | Gen 1 | Gen 2 | Allocated |
+|-------------- |---------:|---------:|---------:|-----------:|------:|------:|----------:|
+| &#39;Stream d13n&#39; | 25.69 ms | 4.823 ms | 14.22 ms | 15000.0000 |     - |     - |  61.34 MB |
+| &#39;String d13n&#39; | 31.22 ms | 4.906 ms | 14.46 ms |  9000.0000 |     - |     - |  36.01 MB |
 
 #### Medium JSON response
 
@@ -37,15 +41,15 @@ BenchmarkDotNet=v0.11.5, OS=Windows 10.0.17763.529 (1809/October2018Update/Redst
 Intel Core i7-7820HQ CPU 2.90GHz (Kaby Lake), 1 CPU, 8 logical and 4 physical cores
 .NET Core SDK=2.2.104
   [Host]     : .NET Core 2.2.2 (CoreCLR 4.6.27317.07, CoreFX 4.6.27318.02), 64bit RyuJIT
-  Job-YNKLGM : .NET Core 2.2.2 (CoreCLR 4.6.27317.07, CoreFX 4.6.27318.02), 64bit RyuJIT
+  Job-UOCDUS : .NET Core 2.2.2 (CoreCLR 4.6.27317.07, CoreFX 4.6.27318.02), 64bit RyuJIT
 
 RunStrategy=ColdStart  
 
 ```
-|        Method |     Mean |    Error |   StdDev |   Median |      Gen 0 | Gen 1 | Gen 2 | Allocated |
-|-------------- |---------:|---------:|---------:|---------:|-----------:|------:|------:|----------:|
-| &#39;Stream d13n&#39; | 210.9 ms | 6.779 ms | 19.99 ms | 204.9 ms | 28000.0000 |     - |     - | 114.06 MB |
-| &#39;String d13n&#39; | 231.1 ms | 8.453 ms | 24.92 ms | 226.6 ms | 27000.0000 |     - |     - | 110.09 MB |
+|        Method |     Mean |    Error |   StdDev |     Gen 0 | Gen 1 | Gen 2 | Allocated |
+|-------------- |---------:|---------:|---------:|----------:|------:|------:|----------:|
+| &#39;Stream d13n&#39; | 24.07 ms | 5.742 ms | 16.93 ms | 2000.0000 |     - |     - |     12 MB |
+| &#39;String d13n&#39; | 25.09 ms | 5.759 ms | 16.98 ms | 3000.0000 |     - |     - |  12.85 MB |
 
 #### Large JSON response
 
@@ -57,12 +61,12 @@ BenchmarkDotNet=v0.11.5, OS=Windows 10.0.17763.529 (1809/October2018Update/Redst
 Intel Core i7-7820HQ CPU 2.90GHz (Kaby Lake), 1 CPU, 8 logical and 4 physical cores
 .NET Core SDK=2.2.104
   [Host]     : .NET Core 2.2.2 (CoreCLR 4.6.27317.07, CoreFX 4.6.27318.02), 64bit RyuJIT
-  Job-YNKLGM : .NET Core 2.2.2 (CoreCLR 4.6.27317.07, CoreFX 4.6.27318.02), 64bit RyuJIT
+  Job-UOCDUS : .NET Core 2.2.2 (CoreCLR 4.6.27317.07, CoreFX 4.6.27318.02), 64bit RyuJIT
 
 RunStrategy=ColdStart  
 
 ```
-|        Method |     Mean |    Error |   StdDev |   Median |      Gen 0 |     Gen 1 |     Gen 2 | Allocated |
-|-------------- |---------:|---------:|---------:|---------:|-----------:|----------:|----------:|----------:|
-| &#39;Stream d13n&#39; | 230.0 ms | 7.945 ms | 23.43 ms | 222.8 ms | 10000.0000 | 2000.0000 |         - |  47.48 MB |
-| &#39;String d13n&#39; | 273.0 ms | 9.763 ms | 28.79 ms | 265.5 ms | 19000.0000 | 9000.0000 | 9000.0000 |   77.3 MB |
+|        Method |     Mean |    Error |   StdDev |      Gen 0 |      Gen 1 |      Gen 2 | Allocated |
+|-------------- |---------:|---------:|---------:|-----------:|-----------:|-----------:|----------:|
+| &#39;Stream d13n&#39; | 229.6 ms | 5.973 ms | 17.61 ms | 10000.0000 |  1000.0000 |          - |  47.54 MB |
+| &#39;String d13n&#39; | 240.8 ms | 6.199 ms | 18.28 ms | 14000.0000 | 14000.0000 | 14000.0000 |  92.42 MB |
