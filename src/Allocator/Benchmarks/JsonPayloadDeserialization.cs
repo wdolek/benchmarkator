@@ -5,14 +5,12 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using Allocator.Data;
+using Allocator.Source;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Engines;
 using BenchmarkDotNet.Order;
-using Newtonsoft.Json;
 
 namespace Allocator.Benchmarks
 {
@@ -24,21 +22,21 @@ namespace Allocator.Benchmarks
     [GenericTypeArguments(typeof(MediumData[]))]
     public class JsonPayloadDeserialization<T>
     {
-        private readonly JsonSerializer _serializer = JsonSerializer.CreateDefault();
-
-        private readonly Dictionary<Type, string> _resourceMapping = new Dictionary<Type, string>
+        private static readonly Dictionary<Type, string> _resourceMapping = new Dictionary<Type, string>
         {
             [typeof(SmallData)] = "Allocator.Data.S.json",
             [typeof(MediumData)] = "Allocator.Data.M.json",
             [typeof(MediumData[])] = "Allocator.Data.L.json",
         };
 
-        private readonly Dictionary<Type, int> _repeatMapping = new Dictionary<Type, int>
+        private static readonly Dictionary<Type, int> _repeatMapping = new Dictionary<Type, int>
         {
             [typeof(SmallData)] = 10000,
             [typeof(MediumData)] = 1000,
             [typeof(MediumData[])] = 100,
         };
+
+        private readonly JsonDeserializator _deserializator = new JsonDeserializator();
 
         private MemoryStream _memory;
         private int _iterationRepeats;
@@ -61,13 +59,7 @@ namespace Allocator.Benchmarks
         {
             for (var i = 0; i < _iterationRepeats; i++)
             {
-                var response = BuildResponse(_memory);
-
-                using (var streamReader = BuildNonClosingStreamReader(await response.Content.ReadAsStreamAsync()))
-                using (var jsonReader = new JsonTextReader(streamReader))
-                {
-                    _serializer.Deserialize<T>(jsonReader);
-                }
+                await _deserializator.DeserializeFromStream<T>(BuildResponse(_memory));
             }
         }
 
@@ -76,10 +68,7 @@ namespace Allocator.Benchmarks
         {
             for (var i = 0; i < _iterationRepeats; i++)
             {
-                var response = BuildResponse(_memory);
-
-                var content = await response.Content.ReadAsStringAsync();
-                JsonConvert.DeserializeObject<T>(content);
+                await _deserializator.DeserializeFromString<T>(BuildResponse(_memory));
             }
         }
 
@@ -95,14 +84,5 @@ namespace Allocator.Benchmarks
                 Content = content
             };
         }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static StreamReader BuildNonClosingStreamReader(Stream inputStream) =>
-            new StreamReader(
-                stream: inputStream,
-                encoding: Encoding.UTF8,
-                detectEncodingFromByteOrderMarks: true,
-                bufferSize: 1024,
-                leaveOpen: true);
     }
 }

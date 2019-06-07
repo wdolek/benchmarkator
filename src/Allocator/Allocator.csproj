@@ -22,4 +22,8 @@
     <EmbeddedResource Include="Data\S.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Allocator.Source\Allocator.Source.csproj" />
+  </ItemGroup>
+
 </Project>
