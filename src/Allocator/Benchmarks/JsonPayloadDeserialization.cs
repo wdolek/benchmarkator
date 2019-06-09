@@ -55,11 +55,15 @@ namespace Allocator.Benchmarks
         }
 
         [Benchmark(Description = "Stream d13n")]
-        public async Task DeserializeLargeStream()
+        [Arguments(128)]
+        [Arguments(512)]
+        [Arguments(1024)]
+        [Arguments(4096)]
+        public async Task DeserializeLargeStream(int bufferSize)
         {
             for (var i = 0; i < _iterationRepeats; i++)
             {
-                await _deserializator.DeserializeFromStream<T>(BuildResponse(_memory));
+                await _deserializator.DeserializeFromStream<T>(BuildResponse(_memory), bufferSize);
             }
         }
 

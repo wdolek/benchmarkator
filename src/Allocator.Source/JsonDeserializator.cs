@@ -11,11 +11,11 @@ namespace Allocator.Source
     {
         private readonly JsonSerializer _serializer = JsonSerializer.CreateDefault();
 
-        public async Task<T> DeserializeFromStream<T>(HttpResponseMessage response)
+        public async Task<T> DeserializeFromStream<T>(HttpResponseMessage response, int bufferSize)
         {
-            // NB! we set minimum buffer size to prevent allocation of bigger chunks of memory
-            //     - this however may impact readding of bigger JSON payloads, so keep that in mind
-            using (var streamReader = BuildNonClosingStreamReader(await response.Content.ReadAsStreamAsync(), 128))
+            using (var streamReader = BuildNonClosingStreamReader(
+                await response.Content.ReadAsStreamAsync(),
+                bufferSize))
             using (var jsonReader = new JsonTextReader(streamReader))
             {
                 return _serializer.Deserialize<T>(jsonReader);
