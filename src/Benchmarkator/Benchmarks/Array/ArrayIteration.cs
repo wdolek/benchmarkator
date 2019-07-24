@@ -61,7 +61,7 @@ namespace Benchmarkator.Benchmarks.Array
             {
                 item = Unsafe.Add(ref first, i);
             }
-            
+
             return item;
         }
 

@@ -14,66 +14,60 @@ Reading:
 JSON example: [here](../../Data/S.json).
 
 ``` ini
-
 BenchmarkDotNet=v0.11.5, OS=Windows 10.0.18362
 Intel Core i7-7600U CPU 2.80GHz (Kaby Lake), 1 CPU, 4 logical and 2 physical cores
-.NET Core SDK=3.0.100-preview5-011568
-  [Host]     : .NET Core 2.2.4 (CoreCLR 4.6.27521.02, CoreFX 4.6.27521.01), 64bit RyuJIT
-  Job-MJUGVB : .NET Core 2.2.4 (CoreCLR 4.6.27521.02, CoreFX 4.6.27521.01), 64bit RyuJIT
-
-RunStrategy=ColdStart  
-
+.NET Core SDK=2.2.301
+  [Host]     : .NET Core 2.2.6 (CoreCLR 4.6.27817.03, CoreFX 4.6.27818.02), 64bit RyuJIT
+  DefaultJob : .NET Core 2.2.6 (CoreCLR 4.6.27817.03, CoreFX 4.6.27818.02), 64bit RyuJIT
 ```
-|        Method | bufferSize |     Mean |    Error |   StdDev |      Gen 0 | Gen 1 | Gen 2 | Allocated |
-|-------------- |----------- |---------:|---------:|---------:|-----------:|------:|------:|----------:|
-| &#39;Stream d13n&#39; |        128 | 22.90 ms | 4.553 ms | 13.42 ms | 18000.0000 |     - |     - |  36.39 MB |
-| &#39;Stream d13n&#39; |        512 | 23.65 ms | 4.345 ms | 12.81 ms | 23000.0000 |     - |     - |  47.38 MB |
-| &#39;Stream d13n&#39; |       1024 | 25.71 ms | 4.331 ms | 12.77 ms | 31000.0000 |     - |     - |  62.03 MB |
-| &#39;String d13n&#39; |          ? | 30.83 ms | 4.986 ms | 14.70 ms | 18000.0000 |     - |     - |   36.7 MB |
-| &#39;Stream d13n&#39; |       4096 | 33.11 ms | 4.473 ms | 13.19 ms | 74000.0000 |     - |     - | 149.92 MB |
+
+|        Method | bufferSize |     Mean |     Error |    StdDev |  Gen 0 | Gen 1 | Gen 2 | Allocated |
+|-------------- |----------- |---------:|----------:|----------:|-------:|------:|------:|----------:|
+| &#39;Stream d13n&#39; |        128 | 1.975 us | 0.0136 us | 0.0106 us | 1.8158 |     - |     - |   3.73 KB |
+| &#39;Stream d13n&#39; |        512 | 2.082 us | 0.0238 us | 0.0223 us | 2.3651 |     - |     - |   4.85 KB |
+| &#39;Stream d13n&#39; |       1024 | 2.452 us | 0.0464 us | 0.0411 us | 3.0975 |     - |     - |   6.35 KB |
+| &#39;String d13n&#39; |          ? | 2.693 us | 0.0181 us | 0.0169 us | 1.8311 |     - |     - |   3.76 KB |
+| &#39;Stream d13n&#39; |       4096 | 3.229 us | 0.0580 us | 0.0542 us | 7.4806 |     - |     - |  15.35 KB |
+
 
 ### Medium JSON response
 
 JSON example: [here](../../Data/M.json).
 
 ``` ini
-
 BenchmarkDotNet=v0.11.5, OS=Windows 10.0.18362
 Intel Core i7-7600U CPU 2.80GHz (Kaby Lake), 1 CPU, 4 logical and 2 physical cores
-.NET Core SDK=3.0.100-preview5-011568
-  [Host]     : .NET Core 2.2.4 (CoreCLR 4.6.27521.02, CoreFX 4.6.27521.01), 64bit RyuJIT
-  Job-MJUGVB : .NET Core 2.2.4 (CoreCLR 4.6.27521.02, CoreFX 4.6.27521.01), 64bit RyuJIT
-
-RunStrategy=ColdStart  
-
+.NET Core SDK=2.2.301
+  [Host]     : .NET Core 2.2.6 (CoreCLR 4.6.27817.03, CoreFX 4.6.27818.02), 64bit RyuJIT
+  DefaultJob : .NET Core 2.2.6 (CoreCLR 4.6.27817.03, CoreFX 4.6.27818.02), 64bit RyuJIT
 ```
-|        Method | bufferSize |     Mean |    Error |   StdDev |      Gen 0 | Gen 1 | Gen 2 | Allocated |
-|-------------- |----------- |---------:|---------:|---------:|-----------:|------:|------:|----------:|
-| &#39;Stream d13n&#39; |        512 | 22.05 ms | 5.106 ms | 15.06 ms |  5000.0000 |     - |     - |   10.6 MB |
-| &#39;Stream d13n&#39; |        128 | 22.46 ms | 5.076 ms | 14.97 ms |  4000.0000 |     - |     - |   9.51 MB |
-| &#39;Stream d13n&#39; |       1024 | 22.64 ms | 5.173 ms | 15.25 ms |  6000.0000 |     - |     - |  12.07 MB |
-| &#39;Stream d13n&#39; |       4096 | 23.73 ms | 5.142 ms | 15.16 ms | 10000.0000 |     - |     - |  20.86 MB |
-| &#39;String d13n&#39; |          ? | 24.02 ms | 5.256 ms | 15.50 ms |  6000.0000 |     - |     - |  12.92 MB |
+
+|        Method | bufferSize |     Mean |     Error |    StdDev |   Gen 0 | Gen 1 | Gen 2 | Allocated |
+|-------------- |----------- |---------:|----------:|----------:|--------:|------:|------:|----------:|
+| &#39;Stream d13n&#39; |       1024 | 20.01 us | 0.1222 us | 0.1143 us |  6.0120 |     - |     - |  12.36 KB |
+| &#39;Stream d13n&#39; |        512 | 20.34 us | 0.2077 us | 0.1943 us |  5.2795 |     - |     - |  10.86 KB |
+| &#39;Stream d13n&#39; |        128 | 20.67 us | 0.4559 us | 0.3807 us |  4.7302 |     - |     - |   9.73 KB |
+| &#39;String d13n&#39; |          ? | 20.98 us | 0.1964 us | 0.1837 us |  6.4392 |     - |     - |  13.23 KB |
+| &#39;Stream d13n&#39; |       4096 | 21.15 us | 0.1238 us | 0.1098 us | 10.4065 |     - |     - |  21.36 KB |
+
 
 ### Large JSON response
 
 JSON example: [here](../../Data/L.json).
 
 ``` ini
-
 BenchmarkDotNet=v0.11.5, OS=Windows 10.0.18362
 Intel Core i7-7600U CPU 2.80GHz (Kaby Lake), 1 CPU, 4 logical and 2 physical cores
-.NET Core SDK=3.0.100-preview5-011568
-  [Host]     : .NET Core 2.2.4 (CoreCLR 4.6.27521.02, CoreFX 4.6.27521.01), 64bit RyuJIT
-  Job-MJUGVB : .NET Core 2.2.4 (CoreCLR 4.6.27521.02, CoreFX 4.6.27521.01), 64bit RyuJIT
-
-RunStrategy=ColdStart  
-
+.NET Core SDK=2.2.301
+  [Host]     : .NET Core 2.2.6 (CoreCLR 4.6.27817.03, CoreFX 4.6.27818.02), 64bit RyuJIT
+  DefaultJob : .NET Core 2.2.6 (CoreCLR 4.6.27817.03, CoreFX 4.6.27818.02), 64bit RyuJIT
 ```
-|        Method | bufferSize |     Mean |    Error |   StdDev |      Gen 0 |      Gen 1 |      Gen 2 | Allocated |
-|-------------- |----------- |---------:|---------:|---------:|-----------:|-----------:|-----------:|----------:|
-| &#39;Stream d13n&#39; |        512 | 202.5 ms | 6.108 ms | 18.01 ms |  8000.0000 |  4000.0000 |          - |   47.4 MB |
-| &#39;Stream d13n&#39; |       4096 | 203.5 ms | 5.710 ms | 16.84 ms |  9000.0000 |  4000.0000 |          - |  48.43 MB |
-| &#39;Stream d13n&#39; |        128 | 203.7 ms | 5.631 ms | 16.60 ms |  8000.0000 |  4000.0000 |          - |  47.29 MB |
-| &#39;Stream d13n&#39; |       1024 | 204.3 ms | 5.347 ms | 15.76 ms |  9000.0000 |  4000.0000 |          - |  47.55 MB |
-| &#39;String d13n&#39; |          ? | 227.4 ms | 5.324 ms | 15.70 ms | 15000.0000 | 14000.0000 | 14000.0000 |  92.43 MB |
+
+|        Method | bufferSize |     Mean |     Error |    StdDev |    Gen 0 |    Gen 1 |    Gen 2 | Allocated |
+|-------------- |----------- |---------:|----------:|----------:|---------:|---------:|---------:|----------:|
+| &#39;Stream d13n&#39; |       1024 | 2.139 ms | 0.0415 ms | 0.0408 ms | 140.6250 |  42.9688 |        - |  486.9 KB |
+| &#39;Stream d13n&#39; |        512 | 2.155 ms | 0.0112 ms | 0.0105 ms | 132.8125 |  42.9688 |        - |  485.4 KB |
+| &#39;Stream d13n&#39; |       4096 | 2.174 ms | 0.0274 ms | 0.0257 ms | 128.9063 |  42.9688 |        - |  495.9 KB |
+| &#39;Stream d13n&#39; |        128 | 2.201 ms | 0.0360 ms | 0.0319 ms | 140.6250 |  42.9688 |        - | 484.27 KB |
+| &#39;String d13n&#39; |          ? | 2.305 ms | 0.0213 ms | 0.0189 ms | 281.2500 | 140.6250 | 140.6250 | 946.45 KB |
+
