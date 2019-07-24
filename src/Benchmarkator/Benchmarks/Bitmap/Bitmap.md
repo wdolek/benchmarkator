@@ -6,7 +6,7 @@ Following data structures are used:
 
 - [`BitArray`](https://docs.microsoft.com/en-us/dotnet/api/system.collections.bitarray?view=netcore-2.2)
 - [`Dictionary<int,bool>`](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2?view=netcore-2.2)
-- [`HashSet<T>`](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.hashset-1?view=netcore-2.2)
+- [`HashSet<int>`](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.hashset-1?view=netcore-2.2)
 
 Benchmark measures access to bits.
 
