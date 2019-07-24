@@ -32,7 +32,7 @@ namespace Benchmarkator.Benchmarks
         private MemoryStream _memory;
 
         [GlobalSetup]
-        public void GlobalSetup()
+        public void Setup()
         {
             var resourceName = ResourceMapping[typeof(T)];
             using (var resourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))

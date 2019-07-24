@@ -2,5 +2,5 @@
 
 Benchmarks:
 
-- [JSON Deserialization](src/Benchmarkator/Benchmarks/JsonPayloadDeserialization.md):
+- [JSON Deserialization](src/Benchmarkator/Benchmarks/Json/JsonPayloadDeserialization.md):
   observing memory allocation by `StreamReader` buffer

@@ -11,7 +11,7 @@ Reading:
 
 ### Small JSON response
 
-JSON example: [here](../Data/S.json).
+JSON example: [here](../../Data/S.json).
 
 ``` ini
 
@@ -34,7 +34,7 @@ RunStrategy=ColdStart
 
 ### Medium JSON response
 
-JSON example: [here](../Data/M.json).
+JSON example: [here](../../Data/M.json).
 
 ``` ini
 
@@ -57,7 +57,7 @@ RunStrategy=ColdStart
 
 ### Large JSON response
 
-JSON example: [here](../Data/L.json).
+JSON example: [here](../../Data/L.json).
 
 ``` ini
 
