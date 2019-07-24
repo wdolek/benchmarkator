@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace Allocator.Source
+namespace Benchmarkator.Source.Json
 {
     public class JsonDeserializator
     {

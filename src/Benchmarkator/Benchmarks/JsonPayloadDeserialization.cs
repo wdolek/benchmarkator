@@ -6,15 +6,13 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Threading.Tasks;
-using Allocator.Data;
-using Allocator.Source;
+using Benchmarkator.Data;
+using Benchmarkator.Source.Json;
 using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Engines;
 using BenchmarkDotNet.Order;
 
-namespace Allocator.Benchmarks
+namespace Benchmarkator.Benchmarks
 {
-    [SimpleJob(RunStrategy.ColdStart)]
     [MemoryDiagnoser]
     [Orderer(SummaryOrderPolicy.FastestToSlowest)]
     [GenericTypeArguments(typeof(SmallData))]
@@ -22,36 +20,26 @@ namespace Allocator.Benchmarks
     [GenericTypeArguments(typeof(MediumData[]))]
     public class JsonPayloadDeserialization<T>
     {
-        private static readonly Dictionary<Type, string> _resourceMapping = new Dictionary<Type, string>
+        private static readonly Dictionary<Type, string> ResourceMapping = new Dictionary<Type, string>
         {
-            [typeof(SmallData)] = "Allocator.Data.S.json",
-            [typeof(MediumData)] = "Allocator.Data.M.json",
-            [typeof(MediumData[])] = "Allocator.Data.L.json",
-        };
-
-        private static readonly Dictionary<Type, int> _repeatMapping = new Dictionary<Type, int>
-        {
-            [typeof(SmallData)] = 10000,
-            [typeof(MediumData)] = 1000,
-            [typeof(MediumData[])] = 100,
+            [typeof(SmallData)] = "Benchmarkator.Data.S.json",
+            [typeof(MediumData)] = "Benchmarkator.Data.M.json",
+            [typeof(MediumData[])] = "Benchmarkator.Data.L.json",
         };
 
         private readonly JsonDeserializator _deserializator = new JsonDeserializator();
 
         private MemoryStream _memory;
-        private int _iterationRepeats;
 
         [GlobalSetup]
         public void GlobalSetup()
         {
-            var resourceName = _resourceMapping[typeof(T)];
+            var resourceName = ResourceMapping[typeof(T)];
             using (var resourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
             {
                 _memory = new MemoryStream();
                 resourceStream.CopyTo(_memory);
             }
-
-            _iterationRepeats = _repeatMapping[typeof(T)];
         }
 
         [Benchmark(Description = "Stream d13n")]
@@ -61,19 +49,14 @@ namespace Allocator.Benchmarks
         [Arguments(4096)]
         public async Task DeserializeLargeStream(int bufferSize)
         {
-            for (var i = 0; i < _iterationRepeats; i++)
-            {
-                await _deserializator.DeserializeFromStream<T>(BuildResponse(_memory), bufferSize);
-            }
+            await _deserializator.DeserializeFromStream<T>(BuildResponse(_memory), bufferSize);
         }
 
         [Benchmark(Description = "String d13n")]
         public async Task DeserializeLargeString()
         {
-            for (var i = 0; i < _iterationRepeats; i++)
-            {
-                await _deserializator.DeserializeFromString<T>(BuildResponse(_memory));
-            }
+            // internally uses default buffer size (1024)
+            await _deserializator.DeserializeFromString<T>(BuildResponse(_memory));
         }
 
         private static HttpResponseMessage BuildResponse(Stream stream)

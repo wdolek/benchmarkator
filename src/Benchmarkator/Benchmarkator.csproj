@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Allocator.Source\Allocator.Source.csproj" />
+    <ProjectReference Include="..\Benchmarkator.Source\Benchmarkator.Source.csproj" />
   </ItemGroup>
 
 </Project>

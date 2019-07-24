@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Allocator.Data
+namespace Benchmarkator.Data
 {
     public class MediumData
     {
