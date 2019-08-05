@@ -1,6 +1,4 @@
-﻿## Accessing array
-
-### Iterating over and accessing array
+﻿## Iterating over array with item access
 
 This benchmarks tries to find the fastest way to access item of given array.
 Several approaches are tested:
