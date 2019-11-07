@@ -1,4 +1,5 @@
-﻿using BenchmarkDotNet.Running;
+﻿using Benchmarkator.Collections;
+using BenchmarkDotNet.Running;
 
 namespace Benchmarkator
 {
@@ -6,7 +7,11 @@ namespace Benchmarkator
     {
         static void Main(string[] args) =>
             BenchmarkSwitcher
-                .FromAssembly(typeof(Program).Assembly)
+                .FromAssemblies(new[]
+                {
+                    typeof(Program).Assembly,
+                    typeof(Categories).Assembly
+                })
                 .Run(args);
     }
 }

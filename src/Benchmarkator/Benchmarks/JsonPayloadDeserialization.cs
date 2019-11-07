@@ -7,7 +7,7 @@ using System.Net.Http.Headers;
 using System.Reflection;
 using System.Threading.Tasks;
 using Benchmarkator.Data;
-using Benchmarkator.Source.Json;
+using Benchmarkator.Source;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Order;
 
