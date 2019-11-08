@@ -32,6 +32,19 @@ namespace Benchmarkator.Benchmarks.Array
         }
 
         [Benchmark]
+        public int ForLoopAccessIndexLocal()
+        {
+            var arr = _data;
+            var item = 0;
+            for (var i = 0; i < arr.Length; i++)
+            {
+                item = arr[i];
+            }
+
+            return item;
+        }
+
+        [Benchmark]
         public unsafe int ForLoopAccessPtr()
         {
             var item = 0;
