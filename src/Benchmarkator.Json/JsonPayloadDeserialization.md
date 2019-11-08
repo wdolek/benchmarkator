@@ -11,7 +11,7 @@ Reading:
 
 ### Small JSON response
 
-JSON example: [here](../../Data/S.json).
+JSON example: [here](./Data/S.json).
 
 ``` ini
 BenchmarkDotNet=v0.11.5, OS=Windows 10.0.18362
@@ -32,7 +32,7 @@ Intel Core i7-7600U CPU 2.80GHz (Kaby Lake), 1 CPU, 4 logical and 2 physical cor
 
 ### Medium JSON response
 
-JSON example: [here](../../Data/M.json).
+JSON example: [here](./Data/M.json).
 
 ``` ini
 BenchmarkDotNet=v0.11.5, OS=Windows 10.0.18362
@@ -53,7 +53,7 @@ Intel Core i7-7600U CPU 2.80GHz (Kaby Lake), 1 CPU, 4 logical and 2 physical cor
 
 ### Large JSON response
 
-JSON example: [here](../../Data/L.json).
+JSON example: [here](./Data/L.json).
 
 ``` ini
 BenchmarkDotNet=v0.11.5, OS=Windows 10.0.18362

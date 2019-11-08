@@ -6,12 +6,11 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Threading.Tasks;
-using Benchmarkator.Data;
-using Benchmarkator.Source;
+using Benchmarkator.Json.Data;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Order;
 
-namespace Benchmarkator.Benchmarks
+namespace Benchmarkator.Json
 {
     [MemoryDiagnoser]
     [Orderer(SummaryOrderPolicy.FastestToSlowest)]
@@ -22,9 +21,9 @@ namespace Benchmarkator.Benchmarks
     {
         private static readonly Dictionary<Type, string> ResourceMapping = new Dictionary<Type, string>
         {
-            [typeof(SmallData)] = "Benchmarkator.Data.S.json",
-            [typeof(MediumData)] = "Benchmarkator.Data.M.json",
-            [typeof(MediumData[])] = "Benchmarkator.Data.L.json",
+            [typeof(SmallData)] = "Benchmarkator.Json.Data.S.json",
+            [typeof(MediumData)] = "Benchmarkator.Json.Data.M.json",
+            [typeof(MediumData[])] = "Benchmarkator.Json.Data.L.json",
         };
 
         private readonly JsonDeserializator _deserializator = new JsonDeserializator();

@@ -10,7 +10,7 @@ Otherwise only results are listed - interpretation of results is up to the reade
 
 ### List of benchmarks (areas):
 
-- [JSON Deserialization](src/Benchmarkator/Benchmarks/JsonPayloadDeserialization.md):
+- [JSON Deserialization](src/Benchmarkator.Json/JsonPayloadDeserialization.md):
   observing memory allocation by `StreamReader` buffer
 - [Bitmap access](src/Benchmarkator/Benchmarks/Bitmap.md):
   determining the fastest approach for implementing "bitmap"
@@ -20,5 +20,9 @@ Otherwise only results are listed - interpretation of results is up to the reade
 ### Running benchmarks
 
 ```
-dotnet run -c:Release -p src/Benchmarkator
+dotnet run -c:Release -p src/Benchmarkator -f netcoreapp3.0
+```
+
+```
+dotnet run -c:Release -p src/Benchmarkator -f netcoreapp3.0 --filter System.Collections*
 ```

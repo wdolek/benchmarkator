@@ -26,7 +26,7 @@ namespace Benchmarkator.Collections
         /// </summary>
         public static T[] ArrayOfUniqueValues<T>(int count)
         {
-            var random = new Random(Seed); 
+            var random = new Random(Seed);
 
             var uniqueValues = new HashSet<T>();
 
@@ -40,10 +40,10 @@ namespace Benchmarkator.Collections
 
             return uniqueValues.ToArray();
         }
-        
+
         public static T[] Array<T>(int count)
         {
-            var random = new Random(Seed); 
+            var random = new Random(Seed);
 
             var result = new T[count];
 
@@ -91,7 +91,7 @@ namespace Benchmarkator.Collections
                 return (T)(object)(random.NextDouble() > 0.5);
             if (typeof(T) == typeof(string))
                 return (T) (object) GenerateRandomString(random, 1, 50);
-            
+
             throw new NotImplementedException($"{typeof(T).Name} is not implemented");
         }
 

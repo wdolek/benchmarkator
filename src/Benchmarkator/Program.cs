@@ -1,4 +1,5 @@
 ﻿using Benchmarkator.Collections;
+using Benchmarkator.Json;
 using BenchmarkDotNet.Running;
 
 namespace Benchmarkator
@@ -9,8 +10,14 @@ namespace Benchmarkator
             BenchmarkSwitcher
                 .FromAssemblies(new[]
                 {
+                    // main assembly
                     typeof(Program).Assembly,
-                    typeof(Categories).Assembly
+
+                    // collections
+                    typeof(Categories).Assembly,
+
+                    // json
+                    typeof(JsonPayloadDeserialization<>).Assembly
                 })
                 .Run(args);
     }

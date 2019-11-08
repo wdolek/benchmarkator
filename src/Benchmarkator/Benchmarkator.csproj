@@ -7,22 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Data\L.json" />
-    <None Remove="Data\M.json" />
-    <None Remove="Data\S.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.12.0" />
     <PackageReference Include="Bogus" Version="28.4.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.5.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Data\L.json" />
-    <EmbeddedResource Include="Data\M.json" />
-    <EmbeddedResource Include="Data\S.json" />
   </ItemGroup>
 
   <ItemGroup>
