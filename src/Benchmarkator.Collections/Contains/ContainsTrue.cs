@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Immutable;
 using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Order;
 
 namespace Benchmarkator.Collections.Contains
 {
     [BenchmarkCategory(Categories.CoreFX, Categories.Collections, Categories.GenericCollections)]
-    [Orderer(SummaryOrderPolicy.FastestToSlowest)]
     [GenericTypeArguments(typeof(int))] // value type
     [GenericTypeArguments(typeof(string))] // reference type
     public class ContainsTrue<T>
