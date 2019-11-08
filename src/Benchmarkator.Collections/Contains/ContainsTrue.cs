@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
+using Benchmarkator.Collections;
 using BenchmarkDotNet.Attributes;
 
-namespace Benchmarkator.Collections.Contains
+namespace System.Collections
 {
-    [BenchmarkCategory(Categories.CoreFX, Categories.Collections, Categories.GenericCollections)]
+    [BenchmarkCategory(Categories.Collections, Categories.GenericCollections)]
     [GenericTypeArguments(typeof(int))] // value type
     [GenericTypeArguments(typeof(string))] // reference type
     public class ContainsTrue<T>
@@ -27,14 +27,14 @@ namespace Benchmarkator.Collections.Contains
         [GlobalSetup]
         public void Setup()
         {
-            _found =  ValuesGenerator.ArrayOfUniqueValues<T>(Size);
-            
+            _found = ValuesGenerator.ArrayOfUniqueValues<T>(Size);
+
             // corefx
-            _immutableArray = System.Collections.Immutable.ImmutableArray.CreateRange<T>(_found);
-            _immutableHashSet = System.Collections.Immutable.ImmutableHashSet.CreateRange<T>(_found);
-            _immutableList = System.Collections.Immutable.ImmutableList.CreateRange<T>(_found);
-            _immutableSortedSet = System.Collections.Immutable.ImmutableSortedSet.CreateRange<T>(_found);
-            
+            _immutableArray = Immutable.ImmutableArray.CreateRange<T>(_found);
+            _immutableHashSet = Immutable.ImmutableHashSet.CreateRange<T>(_found);
+            _immutableList = Immutable.ImmutableList.CreateRange<T>(_found);
+            _immutableSortedSet = Immutable.ImmutableSortedSet.CreateRange<T>(_found);
+
             // LanguageExt.Core
             _langExtImmutableArray = new LanguageExt.Arr<T>().AddRange(_found);
             _langExtImmutableHashSet = new LanguageExt.HashSet<T>().AddRange(_found);
@@ -48,7 +48,7 @@ namespace Benchmarkator.Collections.Contains
             bool result = default;
             ImmutableArray<T> collection = _immutableArray;
             T[] found = _found;
-            
+
             for (int i = 0; i < found.Length; i++)
             {
                 result ^= collection.Contains(found[i]);
@@ -63,7 +63,7 @@ namespace Benchmarkator.Collections.Contains
             bool result = default;
             ImmutableHashSet<T> collection = _immutableHashSet;
             T[] found = _found;
-            
+
             for (int i = 0; i < found.Length; i++)
             {
                 result ^= collection.Contains(found[i]);
@@ -78,7 +78,7 @@ namespace Benchmarkator.Collections.Contains
             bool result = default;
             ImmutableList<T> collection = _immutableList;
             T[] found = _found;
-            
+
             for (int i = 0; i < found.Length; i++)
             {
                 result ^= collection.Contains(found[i]);
@@ -93,7 +93,7 @@ namespace Benchmarkator.Collections.Contains
             bool result = default;
             ImmutableSortedSet<T> collection = _immutableSortedSet;
             T[] found = _found;
-            
+
             for (int i = 0; i < found.Length; i++)
             {
                 result ^= collection.Contains(found[i]);
@@ -108,7 +108,7 @@ namespace Benchmarkator.Collections.Contains
             bool result = default;
             LanguageExt.Arr<T> collection = _langExtImmutableArray;
             T[] found = _found;
-            
+
             for (int i = 0; i < found.Length; i++)
             {
                 result ^= collection.Contains(found[i]);
@@ -116,14 +116,14 @@ namespace Benchmarkator.Collections.Contains
 
             return result;
         }
-        
+
         [Benchmark]
         public bool LanguageExtHashSet()
         {
             bool result = default;
             LanguageExt.HashSet<T> collection = _langExtImmutableHashSet;
             T[] found = _found;
-            
+
             for (int i = 0; i < found.Length; i++)
             {
                 result ^= collection.Contains(found[i]);
@@ -138,7 +138,7 @@ namespace Benchmarkator.Collections.Contains
             bool result = default;
             LanguageExt.Lst<T> collection = _langExtImmutableList;
             T[] found = _found;
-            
+
             for (int i = 0; i < found.Length; i++)
             {
                 result ^= collection.Contains(found[i]);
@@ -153,7 +153,7 @@ namespace Benchmarkator.Collections.Contains
             bool result = default;
             LanguageExt.Set<T> collection = _langExtImmutableSet;
             T[] found = _found;
-            
+
             for (int i = 0; i < found.Length; i++)
             {
                 result ^= collection.Contains(found[i]);
