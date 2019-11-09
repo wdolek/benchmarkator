@@ -10,7 +10,7 @@ Otherwise only results are listed - interpretation of results is up to the reade
 
 ### List of benchmarks (areas):
 
-- [JSON Deserialization](src/Benchmarkator.Json/JsonPayloadDeserialization.md):
+- [JSON Deserialization](src/Benchmarkator.Json/Deserialization/JsonPayloadDeserialization.md):
   observing memory allocation by `StreamReader` buffer
 - [Bitmap access](src/Benchmarkator/Benchmarks/Bitmap.md):
   determining the fastest approach for implementing "bitmap"

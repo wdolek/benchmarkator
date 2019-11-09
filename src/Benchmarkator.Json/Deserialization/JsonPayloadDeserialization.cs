@@ -10,7 +10,7 @@ using Benchmarkator.Json.Data;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Order;
 
-namespace Benchmarkator.Json
+namespace Benchmarkator.Json.Deserialization
 {
     [MemoryDiagnoser]
     [Orderer(SummaryOrderPolicy.FastestToSlowest)]
