@@ -12,10 +12,12 @@ Otherwise only results are listed - interpretation of results is up to the reade
 
 - [JSON Deserialization](src/Benchmarkator.Json/Deserialization/JsonPayloadDeserialization.md):
   observing memory allocation by `StreamReader` buffer
-- [Bitmap access](src/Benchmarkator/Benchmarks/Bitmap.md):
-  determining the fastest approach for implementing "bitmap"
-- [Array access](src/Benchmarkator/Benchmarks/ArrayIteration.md):
+- [Bitmap access](src/Benchmarkator/Bitmap/Bitmap.md):
+  determining the fastest approach for implementing bitmap
+- [Array access](src/Benchmarkator/ArrayIteration/ArrayIteration.md):
   determining the fastest way to access array item (and way of iteration)
+- [Division by `n`](src/Benchmarkator/Division/DivisibleByTwo.md):
+  comparing modulo with logical and when dividing by even number
 
 ### Running benchmarks
 

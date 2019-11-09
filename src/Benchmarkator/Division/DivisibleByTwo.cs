@@ -1,7 +1,7 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Order;
 
-namespace Benchmarkator.Benchmarks
+namespace Benchmarkator.Division
 {
     [Orderer(SummaryOrderPolicy.FastestToSlowest)]
     public class DivisibleByTwo
@@ -12,7 +12,6 @@ namespace Benchmarkator.Benchmarks
         [Benchmark]
         public bool Modulo()
         {
-            // classic approach ...
             return Number % 2 == 0;
         }
 

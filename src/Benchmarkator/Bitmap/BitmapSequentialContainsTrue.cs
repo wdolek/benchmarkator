@@ -3,7 +3,7 @@ using System.Linq;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Order;
 
-namespace Benchmarkator.Benchmarks.Bitmap
+namespace Benchmarkator.Bitmap
 {
     [Orderer(SummaryOrderPolicy.FastestToSlowest)]
     public class BitmapSequentialContainsTrue
