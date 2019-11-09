@@ -14,7 +14,7 @@ namespace Benchmarkator
                     typeof(Program).Assembly,
 
                     // collections
-                    typeof(Categories).Assembly,
+                    typeof(ValuesGenerator).Assembly,
 
                     // json
                     typeof(JsonPayloadDeserialization<>).Assembly

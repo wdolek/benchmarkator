@@ -6,7 +6,6 @@ using BenchmarkDotNet.Attributes;
 
 namespace System.Collections
 {
-    [BenchmarkCategory(Categories.Collections, Categories.GenericCollections)]
     [GenericTypeArguments(typeof(int), typeof(int))] // value type
     [GenericTypeArguments(typeof(string), typeof(string))] // reference type
     public class ContainsKeyFalse<TKey, TValue>

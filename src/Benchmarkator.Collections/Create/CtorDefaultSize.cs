@@ -4,7 +4,6 @@ using Benchmarkator.Collections;
 
 namespace System.Collections
 {
-    [BenchmarkCategory(Categories.Collections, Categories.GenericCollections)]
     [GenericTypeArguments(typeof(int))] // value type
     [GenericTypeArguments(typeof(string))] // reference type
     public class CtorDefaultSize<T>
