@@ -12,7 +12,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benchmarkator.Json", "src\Benchmarkator.Json\Benchmarkator.Json.csproj", "{62BC67B3-9FFB-412E-8556-3C40E5AA1E67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmarkator.Collections", "src\Benchmarkator.Collections\Benchmarkator.Collections.csproj", "{31B5313A-6D84-4DAA-84F0-F6A77F62F6AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benchmarkator.Collections", "src\Benchmarkator.Collections\Benchmarkator.Collections.csproj", "{31B5313A-6D84-4DAA-84F0-F6A77F62F6AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmarkator.Generator", "src\Benchmarkator.Generator\Benchmarkator.Generator.csproj", "{D14FE10D-354E-4C7E-B679-DE0FD504E802}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,10 @@ Global
 		{31B5313A-6D84-4DAA-84F0-F6A77F62F6AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31B5313A-6D84-4DAA-84F0-F6A77F62F6AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31B5313A-6D84-4DAA-84F0-F6A77F62F6AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D14FE10D-354E-4C7E-B679-DE0FD504E802}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D14FE10D-354E-4C7E-B679-DE0FD504E802}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D14FE10D-354E-4C7E-B679-DE0FD504E802}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D14FE10D-354E-4C7E-B679-DE0FD504E802}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

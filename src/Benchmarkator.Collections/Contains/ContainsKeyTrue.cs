@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using Benchmarkator.Collections;
+using Benchmarkator.Generator;
 using BenchmarkDotNet.Attributes;
 
 namespace System.Collections
@@ -24,7 +24,7 @@ namespace System.Collections
         [GlobalSetup]
         public void Setup()
         {
-            _found = ValuesGenerator.ArrayOfUniqueValues<TKey>(Size);
+            _found = ValuesGenerator.Instance.GenerateUniqueValues<TKey>(Size);
             _source = _found.ToDictionary(item => item, item => (TValue)(object)item);
 
             // corefx

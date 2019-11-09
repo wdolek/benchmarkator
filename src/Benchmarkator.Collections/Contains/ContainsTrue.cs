@@ -1,5 +1,5 @@
 ﻿using System.Collections.Immutable;
-using Benchmarkator.Collections;
+using Benchmarkator.Generator;
 using BenchmarkDotNet.Attributes;
 
 namespace System.Collections
@@ -26,7 +26,7 @@ namespace System.Collections
         [GlobalSetup]
         public void Setup()
         {
-            _found = ValuesGenerator.ArrayOfUniqueValues<T>(Size);
+            _found = ValuesGenerator.Instance.GenerateUniqueValues<T>(Size);
 
             // corefx
             _immutableArray = Immutable.ImmutableArray.CreateRange<T>(_found);

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using Benchmarkator.Collections;
+using Benchmarkator.Generator;
 using BenchmarkDotNet.Attributes;
 
 namespace System.Collections
@@ -24,7 +24,7 @@ namespace System.Collections
         [GlobalSetup]
         public void Setup()
         {
-            TKey[] values = ValuesGenerator.ArrayOfUniqueValues<TKey>(Size * 2);
+            TKey[] values = ValuesGenerator.Instance.GenerateUniqueValues<TKey>(Size * 2);
 
             _notFound = values
                 .Take(Size)

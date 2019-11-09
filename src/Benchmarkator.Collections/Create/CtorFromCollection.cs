@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using Benchmarkator.Collections;
+using Benchmarkator.Generator;
 using BenchmarkDotNet.Attributes;
 
 namespace System.Collections
@@ -12,6 +12,7 @@ namespace System.Collections
     {
         private ICollection<T> _collection;
         private IDictionary<T, T> _dictionary;
+
         private (T, T)[] _map;
 
         [Params(256)]
@@ -20,9 +21,14 @@ namespace System.Collections
         [GlobalSetup]
         public void Setup()
         {
-            _collection = ValuesGenerator.ArrayOfUniqueValues<T>(Size);
-            _dictionary = ValuesGenerator.Dictionary<T, T>(Size);
-            _map = _dictionary.Select(kvp => (kvp.Key, kvp.Value)).ToArray();
+            var generator = ValuesGenerator.Instance;
+
+            _collection = generator.GenerateUniqueValues<T>(Size);
+            _dictionary = generator.GenerateDictionary<T, T>(Size);
+
+            _map = _dictionary
+                .Select(kvp => (kvp.Key, kvp.Value))
+                .ToArray();
         }
 
         [Benchmark]

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Immutable;
 using System.Linq;
-using Benchmarkator.Collections;
+using Benchmarkator.Generator;
 using BenchmarkDotNet.Attributes;
 
 namespace System.Collections
@@ -27,7 +27,7 @@ namespace System.Collections
         [GlobalSetup]
         public void Setup()
         {
-            T[] values = ValuesGenerator.ArrayOfUniqueValues<T>(Size * 2);
+            T[] values = ValuesGenerator.Instance.GenerateUniqueValues<T>(Size * 2);
 
             _notFound = values
                 .Take(Size)

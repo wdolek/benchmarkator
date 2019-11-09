@@ -1,6 +1,5 @@
 ﻿using System.Collections.Immutable;
 using BenchmarkDotNet.Attributes;
-using Benchmarkator.Collections;
 
 namespace System.Collections
 {

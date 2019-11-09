@@ -1,6 +1,6 @@
-﻿using Benchmarkator.Collections;
-using Benchmarkator.Json;
+﻿using Benchmarkator.Json;
 using BenchmarkDotNet.Running;
+using System.Collections;
 
 namespace Benchmarkator
 {
@@ -14,7 +14,7 @@ namespace Benchmarkator
                     typeof(Program).Assembly,
 
                     // collections
-                    typeof(ValuesGenerator).Assembly,
+                    typeof(ContainsFalse<>).Assembly,
 
                     // json
                     typeof(JsonPayloadDeserialization<>).Assembly
