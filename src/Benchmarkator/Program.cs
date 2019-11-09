@@ -1,6 +1,5 @@
-﻿using Benchmarkator.Json;
-using BenchmarkDotNet.Running;
-using System.Collections;
+﻿using BenchmarkDotNet.Running;
+using System.Reflection;
 
 namespace Benchmarkator
 {
@@ -14,10 +13,10 @@ namespace Benchmarkator
                     typeof(Program).Assembly,
 
                     // collections
-                    typeof(ContainsFalse<>).Assembly,
+                    Assembly.Load("Benchmarkator.Collections"),
 
                     // json
-                    typeof(JsonPayloadDeserialization<>).Assembly
+                    Assembly.Load("Benchmarkator.Json")
                 })
                 .Run(args);
     }
