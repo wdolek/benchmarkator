@@ -20,7 +20,7 @@ namespace System.Collections
         private LanguageExt.Lst<T> _langExtImmutableList;
         private LanguageExt.Set<T> _langExtImmutableSet;
 
-        [Params(512)]
+        [Params(512, 8192)]
         public int Size;
 
         [GlobalSetup]

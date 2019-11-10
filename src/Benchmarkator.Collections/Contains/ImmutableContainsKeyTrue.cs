@@ -18,7 +18,7 @@ namespace System.Collections
         private LanguageExt.HashMap<TKey, TValue> _langExtHashMap;
         private LanguageExt.Map<TKey, TValue> _langExtMap;
 
-        [Params(512)]
+        [Params(512, 8192)]
         public int Size;
 
         [GlobalSetup]

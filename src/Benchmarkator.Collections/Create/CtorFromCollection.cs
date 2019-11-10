@@ -15,7 +15,7 @@ namespace System.Collections
 
         private (T, T)[] _map;
 
-        [Params(256)]
+        [Params(256, 4096)]
         public int Size;
 
         [GlobalSetup]
