@@ -5,7 +5,7 @@ whereas collections from [`LanguageExt.Core`](https://github.com/louthy/language
 [CHAMP](https://michael.steindorfer.name/publications/phd-thesis-efficient-immutable-collections.pdf)
 or [AVL tree](http://en.wikipedia.org/wiki/AVL_tree).
 
-LanguageExt collections are not fully compatible with those from corefx.
+(Note that `LanguageExt` collections are not drop-in replacement for `System.Collections.Immutable`)
 
 Current benchmarks are _inspired_ by benchmarks from [dotnet/performance](https://github.com/dotnet/performance) (by @adamsitnik).
 
