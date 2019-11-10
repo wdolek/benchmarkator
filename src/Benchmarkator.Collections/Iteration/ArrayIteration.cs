@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Order;
 
-namespace Benchmarkator.ArrayIteration
+namespace Benchmarkator.Collections.Iteration
 {
     [Orderer(SummaryOrderPolicy.FastestToSlowest)]
     public class ArrayIteration

@@ -2,7 +2,7 @@
 using BenchmarkDotNet.Order;
 using System.Linq;
 
-namespace Benchmarkator.ArrayIteration
+namespace Benchmarkator.Collections.Iteration
 {
     [Orderer(SummaryOrderPolicy.FastestToSlowest)]
     public class ArrayIterationFieldOrLocal
