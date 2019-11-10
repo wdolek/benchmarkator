@@ -8,7 +8,7 @@ namespace System.Collections
 {
     [GenericTypeArguments(typeof(int), typeof(int))] // value type
     [GenericTypeArguments(typeof(string), typeof(string))] // reference type
-    public class ContainsKeyFalse<TKey, TValue>
+    public class ImmutableContainsKeyFalse<TKey, TValue>
     {
         private TKey[] _notFound;
         private Dictionary<TKey, TValue> _source;

@@ -18,7 +18,7 @@ Otherwise only results are listed - interpretation of results is up to the reade
   determining the fastest way to access array item (and way of iteration)
 - [Division by `n`](src/Benchmarkator/Division/DivisibleByTwo.md):
   comparing modulo with logical and when dividing by even number
-- [Collection Contains ...](src/Benchmarkator.Collections/Contains/CollectionContains.md):
+- [Collection Contains ...](src/Benchmarkator.Collections/Contains/ImmutableCollectionContains.md):
   comparing `corefx` immutable collections with collections from `LanguageExt.Core`
 
 ### Running benchmarks

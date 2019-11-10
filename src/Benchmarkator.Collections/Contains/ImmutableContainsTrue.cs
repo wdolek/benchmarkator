@@ -6,7 +6,7 @@ namespace System.Collections
 {
     [GenericTypeArguments(typeof(int))] // value type
     [GenericTypeArguments(typeof(string))] // reference type
-    public class ContainsTrue<T>
+    public class ImmutableContainsTrue<T>
         where T : IEquatable<T>
     {
         private T[] _found;
