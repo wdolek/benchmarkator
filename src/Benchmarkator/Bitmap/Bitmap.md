@@ -12,26 +12,24 @@ Benchmark measures access to bits.
 
 ### Whole bitmap set, access all items in sequence
 
-In this scenario, whole data strucutre is filled as set (all bits set),
+In this scenario, whole data structure is filled as set (all bits set),
 then all items are accessed to get value. See [BitmapSequentialContainsTrue](./BitmapSequentialContainsTrue.cs) for details.
 
 ``` ini
-BenchmarkDotNet=v0.11.5, OS=Windows 10.0.18362
-Intel Core i7-7600U CPU 2.80GHz (Kaby Lake), 1 CPU, 4 logical and 2 physical cores
-.NET Core SDK=2.2.301
-  [Host]     : .NET Core 2.2.6 (CoreCLR 4.6.27817.03, CoreFX 4.6.27818.02), 64bit RyuJIT
-  DefaultJob : .NET Core 2.2.6 (CoreCLR 4.6.27817.03, CoreFX 4.6.27818.02), 64bit RyuJIT
+BenchmarkDotNet=v0.12.0, OS=Windows 10.0.18362
+Intel Core i7-7820HQ CPU 2.90GHz (Kaby Lake), 1 CPU, 8 logical and 4 physical cores
+.NET Core SDK=3.0.100
+  [Host]     : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT
+  DefaultJob : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT
 ```
-
-|             Method | Length |       Mean |      Error |     StdDev |
-|------------------- |------- |-----------:|-----------:|-----------:|
-|   BitArrayContains |     32 |   103.9 ns |  0.2558 ns |  0.2392 ns |
-| DictionaryContains |     32 |   234.1 ns |  1.0526 ns |  0.9846 ns |
-|        SetContains |     32 |   293.3 ns |  0.8027 ns |  0.7116 ns |
-|   BitArrayContains |   1024 | 3,200.5 ns |  6.7429 ns |  5.6306 ns |
-| DictionaryContains |   1024 | 9,056.4 ns | 21.3214 ns | 19.9440 ns |
-|        SetContains |   1024 | 9,161.6 ns | 36.7346 ns | 34.3616 ns |
-
+|             Method | Length |        Mean |     Error |    StdDev |
+|------------------- |------- |------------:|----------:|----------:|
+|   BitArrayContains |     32 |    31.47 ns |  0.123 ns |  0.102 ns |
+| DictionaryContains |     32 |   243.68 ns |  1.732 ns |  1.536 ns |
+|        SetContains |     32 |   286.01 ns |  0.525 ns |  0.439 ns |
+|   BitArrayContains |   1024 | 1,023.04 ns |  5.720 ns |  4.466 ns |
+| DictionaryContains |   1024 | 7,596.67 ns | 63.255 ns | 59.169 ns |
+|        SetContains |   1024 | 9,692.24 ns | 28.163 ns | 26.344 ns |
 
 ### Randomly generated bitmap, random access
 
@@ -39,18 +37,17 @@ In this scenario, bitmap is generated and accessed randomly - not all bits are s
 See [BitmapRandomContains](./BitmapRandomContains.cs) for more details.
 
 ``` ini
-BenchmarkDotNet=v0.11.5, OS=Windows 10.0.18362
-Intel Core i7-7600U CPU 2.80GHz (Kaby Lake), 1 CPU, 4 logical and 2 physical cores
-.NET Core SDK=2.2.301
-  [Host]     : .NET Core 2.2.6 (CoreCLR 4.6.27817.03, CoreFX 4.6.27818.02), 64bit RyuJIT
-  DefaultJob : .NET Core 2.2.6 (CoreCLR 4.6.27817.03, CoreFX 4.6.27818.02), 64bit RyuJIT
+BenchmarkDotNet=v0.12.0, OS=Windows 10.0.18362
+Intel Core i7-7820HQ CPU 2.90GHz (Kaby Lake), 1 CPU, 8 logical and 4 physical cores
+.NET Core SDK=3.0.100
+  [Host]     : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT
+  DefaultJob : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT
 ```
-
-|             Method | Length |        Mean |      Error |     StdDev |
-|------------------- |------- |------------:|-----------:|-----------:|
-|   BitArrayContains |     32 |    102.0 ns |  0.4786 ns |  0.4243 ns |
-| DictionaryContains |     32 |    174.1 ns |  0.6344 ns |  0.5624 ns |
-|        SetContains |     32 |    274.7 ns |  1.6816 ns |  1.5729 ns |
-|   BitArrayContains |   1024 |  3,204.0 ns |  8.0440 ns |  7.1308 ns |
-| DictionaryContains |   1024 |  8,355.0 ns | 63.3567 ns | 59.2639 ns |
-|        SetContains |   1024 | 13,367.4 ns | 59.2698 ns | 55.4410 ns |
+|             Method | Length |         Mean |      Error |    StdDev |
+|------------------- |------- |-------------:|-----------:|----------:|
+|   BitArrayContains |     32 |     38.79 ns |   2.330 ns |  2.947 ns |
+| DictionaryContains |     32 |    186.07 ns |   1.500 ns |  1.171 ns |
+|        SetContains |     32 |    267.01 ns |   2.234 ns |  1.866 ns |
+|   BitArrayContains |   1024 |  1,161.31 ns |   3.080 ns |  2.881 ns |
+| DictionaryContains |   1024 |  6,896.75 ns | 117.314 ns | 97.962 ns |
+|        SetContains |   1024 | 13,708.36 ns |  80.975 ns | 71.782 ns |

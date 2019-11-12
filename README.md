@@ -20,6 +20,8 @@ Otherwise only results are listed - interpretation of results is up to the reade
   comparing modulo with logical and when dividing by even number
 - [Collection Contains ...](src/Benchmarkator.Collections/Contains/ImmutableCollectionContains.md):
   comparing `corefx` immutable collections with collections from `LanguageExt.Core`
+- [Collection Create](src/Benchmarkator.Collections/Create/CreateCtor.md):
+  comparing `corefx` immutable collections instantiation/creation with `LanguageExt.Core` (`ctor`, `.Create`)
 
 ### Running benchmarks
 
