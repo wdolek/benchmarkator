@@ -1,4 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Order;
 using Bogus;
 using System;
 using System.Collections.Generic;
@@ -6,7 +8,9 @@ using System.Linq;
 
 namespace Benchmarkator.Collections.Lookup
 {
+    [GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
     [CategoriesColumn]
+    [Orderer(SummaryOrderPolicy.FastestToSlowest)]
     public class ValueLookup
     {
         private int _existingIdFirst;
@@ -17,7 +21,7 @@ namespace Benchmarkator.Collections.Lookup
         private List<ValueClass> _list = null!;
         private Dictionary<int, ValueClass> _dict = null!;
 
-        [Params(4, 16, 128)]
+        [Params(4, 16, 64, 128, 512)]
         public int Size;
 
         [GlobalSetup]
@@ -43,7 +47,7 @@ namespace Benchmarkator.Collections.Lookup
                 source.Select(v => new KeyValuePair<int, ValueClass>(v.Id, v)));
         }
 
-        [Benchmark]
+        [Benchmark(Baseline = true)]
         [BenchmarkCategory("Array", "First")]
         public ValueClass? ArrayLookupFirst()
         {
@@ -59,7 +63,7 @@ namespace Benchmarkator.Collections.Lookup
             return null;
         }
 
-        [Benchmark]
+        [Benchmark(Baseline = true)]
         [BenchmarkCategory("Array", "Last")]
         public ValueClass? ArrayLookupLast()
         {
@@ -75,7 +79,7 @@ namespace Benchmarkator.Collections.Lookup
             return null;
         }
 
-        [Benchmark]
+        [Benchmark(Baseline = true)]
         [BenchmarkCategory("Array", "Missing")]
         public ValueClass? ArrayLookupMissing()
         {
