@@ -11,7 +11,7 @@ namespace Benchmarkator.Collections.Iteration
         [Params(4096)]
         public int Length;
 
-        private int[] _data;
+        private int[] _data = null!;
 
         [GlobalSetup]
         public void Setup()

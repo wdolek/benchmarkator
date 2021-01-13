@@ -30,6 +30,7 @@ namespace Benchmarkator.Generator
         }
 
         public Dictionary<TKey, TValue> GenerateDictionary<TKey, TValue>(int count)
+            where TKey : notnull
         {
             var dict = new Dictionary<TKey, TValue>(count);
             while (dict.Count < count)

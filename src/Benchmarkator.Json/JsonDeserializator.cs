@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -18,7 +19,8 @@ namespace Benchmarkator.Json
                 bufferSize))
             using (var jsonReader = new JsonTextReader(streamReader))
             {
-                return _serializer.Deserialize<T>(jsonReader);
+                return _serializer.Deserialize<T>(jsonReader)
+                    ?? throw new Exception("Deserializer returnet `null`");
             }
         }
 

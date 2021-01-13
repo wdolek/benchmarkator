@@ -3,9 +3,10 @@ using BenchmarkDotNet.Attributes;
 
 namespace System.Collections
 {
-    [GenericTypeArguments(typeof(int))] // value type
-    [GenericTypeArguments(typeof(string))] // reference type
+    [GenericTypeArguments(typeof(int))]
+    [GenericTypeArguments(typeof(string))]
     public class CtorDefaultSize<T>
+        where T : notnull
     {
         [Benchmark]
         public ImmutableArray<T> ImmutableArray() => Immutable.ImmutableArray.Create<T>();

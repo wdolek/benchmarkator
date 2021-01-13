@@ -6,15 +6,16 @@ using BenchmarkDotNet.Attributes;
 
 namespace System.Collections
 {
-    [GenericTypeArguments(typeof(int), typeof(int))] // value type
-    [GenericTypeArguments(typeof(string), typeof(string))] // reference type
+    [GenericTypeArguments(typeof(int), typeof(int))]
+    [GenericTypeArguments(typeof(string), typeof(string))]
     public class ImmutableContainsKeyFalse<TKey, TValue>
+        where TKey : notnull
     {
-        private TKey[] _notFound;
-        private Dictionary<TKey, TValue> _source;
+        private TKey[] _notFound = null!;
+        private Dictionary<TKey, TValue> _source = null!;
 
-        private ImmutableDictionary<TKey, TValue> _immutableDictionary;
-        private ImmutableSortedDictionary<TKey, TValue> _immutableSortedDictionary;
+        private ImmutableDictionary<TKey, TValue> _immutableDictionary = null!;
+        private ImmutableSortedDictionary<TKey, TValue> _immutableSortedDictionary = null!;
         private LanguageExt.HashMap<TKey, TValue> _langExtHashMap;
         private LanguageExt.Map<TKey, TValue> _langExtMap;
 

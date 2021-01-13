@@ -5,17 +5,17 @@ using BenchmarkDotNet.Attributes;
 
 namespace System.Collections
 {
-    [GenericTypeArguments(typeof(int))] // value type
-    [GenericTypeArguments(typeof(string))] // reference type
+    [GenericTypeArguments(typeof(int))]
+    [GenericTypeArguments(typeof(string))]
     public class ImmutableContainsFalse<T>
-        where T : IEquatable<T>
+        where T : notnull, IEquatable<T>
     {
-        private T[] _notFound;
+        private T[] _notFound = null!;
 
         private ImmutableArray<T> _immutableArray;
-        private ImmutableHashSet<T> _immutableHashSet;
-        private ImmutableList<T> _immutableList;
-        private ImmutableSortedSet<T> _immutableSortedSet;
+        private ImmutableHashSet<T> _immutableHashSet = null!;
+        private ImmutableList<T> _immutableList = null!;
+        private ImmutableSortedSet<T> _immutableSortedSet = null!;
         private LanguageExt.Arr<T> _langExtImmutableArray;
         private LanguageExt.HashSet<T> _langExtImmutableHashSet;
         private LanguageExt.Lst<T> _langExtImmutableList;

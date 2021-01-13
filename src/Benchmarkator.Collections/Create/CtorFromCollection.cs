@@ -6,14 +6,15 @@ using BenchmarkDotNet.Attributes;
 
 namespace System.Collections
 {
-    [GenericTypeArguments(typeof(int))] // value type
-    [GenericTypeArguments(typeof(string))] // reference type
+    [GenericTypeArguments(typeof(int))]
+    [GenericTypeArguments(typeof(string))]
     public class CtorFromCollection<T>
+        where T : notnull
     {
-        private ICollection<T> _collection;
-        private IDictionary<T, T> _dictionary;
+        private ICollection<T> _collection = null!;
+        private IDictionary<T, T> _dictionary = null!;
 
-        private (T, T)[] _map;
+        private (T, T)[] _map = null!;
 
         [Params(256, 4096)]
         public int Size;

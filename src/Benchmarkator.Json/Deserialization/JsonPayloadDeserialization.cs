@@ -28,7 +28,7 @@ namespace Benchmarkator.Json.Deserialization
 
         private readonly JsonDeserializator _deserializator = new JsonDeserializator();
 
-        private MemoryStream _memory;
+        private MemoryStream _memory = null!;
 
         [GlobalSetup]
         public void Setup()
@@ -36,6 +36,11 @@ namespace Benchmarkator.Json.Deserialization
             var resourceName = ResourceMapping[typeof(T)];
             using (var resourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
             {
+                if (resourceStream is null)
+                {
+                    throw new Exception($"Resource '{resourceName}' not visible/available");
+                }
+
                 _memory = new MemoryStream();
                 resourceStream.CopyTo(_memory);
             }
