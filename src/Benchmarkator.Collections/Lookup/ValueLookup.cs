@@ -11,6 +11,7 @@ namespace Benchmarkator.Collections.Lookup
     [GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
     [CategoriesColumn]
     [Orderer(SummaryOrderPolicy.FastestToSlowest)]
+    [ShortRunJob]
     public class ValueLookup
     {
         private int _existingIdFirst;
@@ -48,7 +49,7 @@ namespace Benchmarkator.Collections.Lookup
         }
 
         [Benchmark(Baseline = true)]
-        [BenchmarkCategory("Array", "First")]
+        [BenchmarkCategory("First")]
         public ValueClass? ArrayLookupFirst()
         {
             var local = _array;
@@ -64,7 +65,7 @@ namespace Benchmarkator.Collections.Lookup
         }
 
         [Benchmark(Baseline = true)]
-        [BenchmarkCategory("Array", "Last")]
+        [BenchmarkCategory("Last")]
         public ValueClass? ArrayLookupLast()
         {
             var local = _array;
@@ -80,7 +81,7 @@ namespace Benchmarkator.Collections.Lookup
         }
 
         [Benchmark(Baseline = true)]
-        [BenchmarkCategory("Array", "Missing")]
+        [BenchmarkCategory("Missing")]
         public ValueClass? ArrayLookupMissing()
         {
             var local = _array;
@@ -96,7 +97,7 @@ namespace Benchmarkator.Collections.Lookup
         }
 
         [Benchmark]
-        [BenchmarkCategory("List", "First")]
+        [BenchmarkCategory("First")]
         public ValueClass? ListLookupFirst()
         {
             var local = _list;
@@ -112,7 +113,7 @@ namespace Benchmarkator.Collections.Lookup
         }
 
         [Benchmark]
-        [BenchmarkCategory("List", "Last")]
+        [BenchmarkCategory("Last")]
         public ValueClass? ListLookupLast()
         {
             var local = _list;
@@ -128,7 +129,7 @@ namespace Benchmarkator.Collections.Lookup
         }
 
         [Benchmark]
-        [BenchmarkCategory("List", "Missing")]
+        [BenchmarkCategory("Missing")]
         public ValueClass? ListLookupMissing()
         {
             var local = _list;
@@ -144,21 +145,21 @@ namespace Benchmarkator.Collections.Lookup
         }
 
         [Benchmark]
-        [BenchmarkCategory("Dictionary", "First")]
+        [BenchmarkCategory("First")]
         public ValueClass? DictLookupFirst() =>
             _dict.TryGetValue(_existingIdFirst, out var value)
                 ? value
                 : null;
 
         [Benchmark]
-        [BenchmarkCategory("Dictionary", "Last")]
+        [BenchmarkCategory("Last")]
         public ValueClass? DictLookupLast() =>
             _dict.TryGetValue(_existingIdLast, out var value)
                 ? value
                 : null;
 
         [Benchmark]
-        [BenchmarkCategory("Dictionary", "Missing")]
+        [BenchmarkCategory("Missing")]
         public ValueClass? DictLookupMissing() =>
             _dict.TryGetValue(_missingId, out var value)
                 ? value
