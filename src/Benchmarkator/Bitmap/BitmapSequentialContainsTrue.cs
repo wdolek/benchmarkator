@@ -11,9 +11,9 @@ namespace Benchmarkator.Bitmap
         [Params(32, 1024)]
         public int Length;
 
-        private System.Collections.BitArray _bitArray;
-        private Dictionary<int, bool> _map;
-        private HashSet<int> _set;
+        private System.Collections.BitArray _bitArray = null!;
+        private Dictionary<int, bool> _map = null!;
+        private HashSet<int> _set = null!;
 
         [GlobalSetup]
         public void Setup()
