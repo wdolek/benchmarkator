@@ -8,29 +8,27 @@ using Newtonsoft.Json;
 
 namespace Benchmarkator.Json
 {
-    public class JsonDeserializator
+    public class NewtonsoftJsonDeserializator : IJsonDeserializator
     {
         private readonly JsonSerializer _serializer = JsonSerializer.CreateDefault();
 
         public async Task<T> DeserializeFromStream<T>(HttpResponseMessage response, int bufferSize)
         {
-            using (var streamReader = BuildNonClosingStreamReader(
-                await response.Content.ReadAsStreamAsync(),
-                bufferSize))
-            using (var jsonReader = new JsonTextReader(streamReader))
-            {
-                return _serializer.Deserialize<T>(jsonReader)
-                    ?? throw new Exception("Deserializer returnet `null`");
-            }
+            var responsePayloadStream = await response.Content.ReadAsStreamAsync();
+
+            using var streamReader = BuildNonClosingStreamReader(responsePayloadStream, bufferSize);
+            using var jsonReader = new JsonTextReader(streamReader);
+
+            return _serializer.Deserialize<T>(jsonReader) ?? throw new Exception("Deserializer returnet `null`");
         }
 
         public async Task<T?> DeserializeFromString<T>(HttpResponseMessage response)
         {
-            var content = await response.Content.ReadAsStringAsync();
+            var responsePayloadString = await response.Content.ReadAsStringAsync();
 
             // NB! uses `JsonTextReader` with `StringReader` internally:
             // https://github.com/JamesNK/Newtonsoft.Json/blob/master/Src/Newtonsoft.Json/JsonConvert.cs#L816
-            return JsonConvert.DeserializeObject<T>(content);
+            return JsonConvert.DeserializeObject<T>(responsePayloadString);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

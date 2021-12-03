@@ -13,6 +13,7 @@ using BenchmarkDotNet.Order;
 namespace Benchmarkator.Json.Deserialization
 {
     [MemoryDiagnoser]
+    [CategoriesColumn]
     [Orderer(SummaryOrderPolicy.FastestToSlowest)]
     [GenericTypeArguments(typeof(SmallData))]
     [GenericTypeArguments(typeof(MediumData))]
@@ -26,7 +27,8 @@ namespace Benchmarkator.Json.Deserialization
             [typeof(MediumData[])] = "Benchmarkator.Json.Data.L.json",
         };
 
-        private readonly JsonDeserializator _deserializator = new JsonDeserializator();
+        private readonly NewtonsoftJsonDeserializator _newtonsoftJsonDeserializator = new NewtonsoftJsonDeserializator();
+        private readonly SystemTextJsonDeserializator _systemTextJsonDeserializator = new SystemTextJsonDeserializator();
 
         private MemoryStream _memory = null!;
 
@@ -46,21 +48,42 @@ namespace Benchmarkator.Json.Deserialization
             }
         }
 
-        [Benchmark(Description = "Stream d13n")]
+        [Benchmark(Description = "Stream d13n (Newtonsoft)")]
+        [BenchmarkCategory("newtonsoft")]
         [Arguments(128)]
         [Arguments(512)]
         [Arguments(1024)]
         [Arguments(4096)]
         public async Task DeserializeLargeStream(int bufferSize)
         {
-            await _deserializator.DeserializeFromStream<T>(BuildResponse(_memory), bufferSize);
+            await _newtonsoftJsonDeserializator.DeserializeFromStream<T>(BuildResponse(_memory), bufferSize);
         }
 
-        [Benchmark(Description = "String d13n")]
+        [Benchmark(Description = "String d13n (Newtonsoft)")]
+        [BenchmarkCategory("newtonsoft")]
         public async Task DeserializeLargeString()
         {
             // internally uses default buffer size (1024)
-            await _deserializator.DeserializeFromString<T>(BuildResponse(_memory));
+            await _newtonsoftJsonDeserializator.DeserializeFromString<T>(BuildResponse(_memory));
+        }
+
+        [Benchmark(Description = "Stream d13n (System.Text.Json)")]
+        [BenchmarkCategory("system.text.json")]
+        [Arguments(128)]
+        [Arguments(512)]
+        [Arguments(1024)]
+        [Arguments(4096)]
+        public async Task DeserializeLargeStreamSTJ(int bufferSize)
+        {
+            await _systemTextJsonDeserializator.DeserializeFromStream<T>(BuildResponse(_memory), bufferSize);
+        }
+
+        [Benchmark(Description = "String d13n (System.Text.Json)")]
+        [BenchmarkCategory("system.text.json")]
+        public async Task DeserializeLargeStringSTJ()
+        {
+            // internally uses default buffer size (1024)
+            await _systemTextJsonDeserializator.DeserializeFromString<T>(BuildResponse(_memory));
         }
 
         private static HttpResponseMessage BuildResponse(Stream stream)

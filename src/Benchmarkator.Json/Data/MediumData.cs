@@ -1,10 +1,12 @@
 ﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Benchmarkator.Json.Data
 {
     public class MediumData
     {
         [JsonProperty("_id")]
+        [JsonPropertyName("_id")]
         public string? Id { get; set; }
         public int Index { get; set; }
         public string? Guid { get; set; }
