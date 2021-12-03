@@ -9,14 +9,10 @@ namespace Benchmarkator
             BenchmarkSwitcher
                 .FromAssemblies(new[]
                 {
-                    // main assembly
                     typeof(Program).Assembly,
-
-                    // collections
                     Assembly.Load("Benchmarkator.Collections"),
-
-                    // json
-                    Assembly.Load("Benchmarkator.Json")
+                    Assembly.Load("Benchmarkator.Json"),
+                    Assembly.Load("Benchmarkator.MongoDb")
                 })
                 .Run(args);
     }

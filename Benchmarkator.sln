@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benchmarkator.Collections",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benchmarkator.Generator", "src\Benchmarkator.Generator\Benchmarkator.Generator.csproj", "{D14FE10D-354E-4C7E-B679-DE0FD504E802}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmarkator.MongoDb", "src\Benchmarkator.MongoDb\Benchmarkator.MongoDb.csproj", "{6D6673B6-F83D-4D3A-8B65-036211361F74}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{D14FE10D-354E-4C7E-B679-DE0FD504E802}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D14FE10D-354E-4C7E-B679-DE0FD504E802}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D14FE10D-354E-4C7E-B679-DE0FD504E802}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D6673B6-F83D-4D3A-8B65-036211361F74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D6673B6-F83D-4D3A-8B65-036211361F74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D6673B6-F83D-4D3A-8B65-036211361F74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D6673B6-F83D-4D3A-8B65-036211361F74}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
