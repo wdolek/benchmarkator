@@ -24,7 +24,7 @@ namespace Benchmarkator.Json
             }
         }
 
-        public async Task<T> DeserializeFromString<T>(HttpResponseMessage response)
+        public async Task<T?> DeserializeFromString<T>(HttpResponseMessage response)
         {
             var content = await response.Content.ReadAsStringAsync();
 
