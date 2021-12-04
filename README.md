@@ -25,19 +25,23 @@ Only results are listed - interpretation of results is up to the readers themsel
   comparing `corefx` immutable collections instantiation/creation with `LanguageExt.Core` (`ctor`, `.Create`)
 - [Collection Lookup](src/Benchmarkator.Collections/Lookup/ValueLookup.md):
   benchmark of lookup of structured value (e.g. `Id`), comparing array, `List<T>` and `Dictionary<TKey, TValue>`
+- [System.Text.Json.JsonDocument serialization](src/Benchmarkator.MongoDb/JsonDocumentSerialization.md)
+  benchmark of serialization of `System.Text.Json.JsonDocument`
+- [System.Text.Json.JsonDocument to MongoDB.Bson.BsonDocument](src/Benchmarkator.MongoDb/JsonDocumentToBsonDocument.md)
+  benchmark of conversion of JSON to BSON document
 
 Not all benchmarks may be listed, check source directly.
 
 ### Running benchmarks
 
 ```
-dotnet run -c Release -p src/Benchmarkator -f net5.0
+dotnet run -c Release -p src/Benchmarkator -f net6.0
 ```
 
 Runnint benchmarks related to `System.Collections`:
 
 ```
-dotnet run -c Release -p src/Benchmarkator -f net5.0 --filter System.Collections*
+dotnet run -c Release -p src/Benchmarkator -f net6.0 --filter System.Collections*
 ```
 
 More about running benchmarks: [BenchmarkDotNet | How to use console arguments](https://benchmarkdotnet.org/articles/guides/console-args.html).
