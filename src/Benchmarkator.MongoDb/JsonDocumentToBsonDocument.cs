@@ -1,4 +1,5 @@
-﻿using BenchmarkDotNet.Attributes;
+﻿using Benchmarkator.Generator;
+using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Order;
 using MongoDB.Bson;
 using MongoDB.Bson.IO;
@@ -6,7 +7,6 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using System;
 using System.IO;
-using System.Reflection;
 using System.Text;
 using System.Text.Json;
 
@@ -14,28 +14,33 @@ namespace Benchmarkator.MongoDb
 {
     [MemoryDiagnoser]
     [Orderer(SummaryOrderPolicy.FastestToSlowest)]
-    public class JsonToBson
+    public class JsonDocumentToBsonDocument
     {
+        public enum DataSize
+        {
+            Small,
+            Medium,
+            Large,
+        }
+
         private JsonDocument _jsonDocument = null!;
+
+        [ParamsAllValues]
+        public DataSize Size { get; set; }
 
         [GlobalSetup]
         public void Setup()
         {
-            var dataEmbededResourceName = "Benchmarkator.MongoDb.Data.entity.json";
-            using (var resourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(dataEmbededResourceName))
+            var jsonGenerator = JsonGenerator.Instance;
+            var jsonValue = Size switch
             {
-                if (resourceStream is null)
-                {
-                    throw new Exception($"Resource '{dataEmbededResourceName}' not visible/available");
-                }
+                DataSize.Small => jsonGenerator.SmallJson(),
+                DataSize.Medium => jsonGenerator.MediumJson(),
+                DataSize.Large => jsonGenerator.LargeJson(),
+                _ => throw new NotSupportedException()
+            };
 
-                var memory = new MemoryStream();
-                resourceStream.CopyTo(memory);
-
-                memory.Seek(0, SeekOrigin.Begin);
-
-                _jsonDocument = JsonDocument.Parse(memory);
-            }
+            _jsonDocument = JsonDocument.Parse(jsonValue);
         }
 
         [Benchmark(Baseline = true, Description = "JsonDocument -> string -> BsonDocument")]
@@ -45,7 +50,7 @@ namespace Benchmarkator.MongoDb
             return BsonDocument.Parse(str);
         }
 
-        [Benchmark(Description = "JsonDocument -> MemoryStream -> str -> BsonDocument")]
+        [Benchmark(Description = "JsonDocument: WriteTo -> MemoryStream -> string -> BsonDocument")]
         public BsonDocument SerializeStringFromMemoryStream()
         {
             using var memory = new MemoryStream();
@@ -58,7 +63,7 @@ namespace Benchmarkator.MongoDb
             return BsonDocument.Parse(str);
         }
 
-        [Benchmark(Description = "JsonDocument -> MemoryStream -> BsonDocument")]
+        [Benchmark(Description = "JsonDocument: WriteTo -> MemoryStream -> BsonDocument")]
         public BsonDocument SerializeUsingMemoryStream()
         {
             using var memory = new MemoryStream();
