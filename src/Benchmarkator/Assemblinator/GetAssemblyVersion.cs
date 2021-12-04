@@ -1,19 +1,15 @@
-﻿#nullable enable
-
-using System.Reflection;
+﻿using System.Reflection;
 using BenchmarkDotNet.Attributes;
 
 namespace Benchmarkator.Assemblinator
 {
     public class GetAssemblyVersion
     {
-        private bool isRead;
         private string? _version;
         
         [GlobalSetup]
         public void Setup()
         {
-            isRead = false;
             _version = null;
         }
 
