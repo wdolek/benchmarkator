@@ -9,13 +9,13 @@ namespace Benchmarkator.Generator
     {
         private const string StringChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
-        public static readonly ValuesGenerator Instance = new ValuesGenerator();
+        public static readonly ValuesGenerator Instance = new ValuesGenerator(DefaultValues.RandomSeed);
 
         private readonly Randomizer _rand;
 
-        public ValuesGenerator()
+        public ValuesGenerator(int seed)
         {
-            _rand = new Randomizer(1234);
+            _rand = new Randomizer(seed);
         }
 
         public T[] GenerateUniqueValues<T>(int count)
