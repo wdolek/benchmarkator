@@ -1,11 +1,10 @@
 ﻿using Newtonsoft.Json;
 
-namespace Benchmarkator.Json.Data
+namespace Benchmarkator.Json.Data;
+
+public class SmallData
 {
-    public class SmallData
-    {
-        [JsonProperty("_id")]
-        public string? Id { get; set; }
-        public string? Guid { get; set; }
-    }
+    [JsonProperty("_id")]
+    public string? Id { get; set; }
+    public string? Guid { get; set; }
 }

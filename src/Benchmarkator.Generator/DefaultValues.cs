@@ -1,7 +1,6 @@
-﻿namespace Benchmarkator.Generator
+﻿namespace Benchmarkator.Generator;
+
+public class DefaultValues
 {
-    public class DefaultValues
-    {
-        public static readonly int RandomSeed = 8675309;
-    }
+    public static readonly int RandomSeed = 8675309;
 }

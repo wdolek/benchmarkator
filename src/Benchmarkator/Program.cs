@@ -1,19 +1,18 @@
 ﻿using BenchmarkDotNet.Running;
 using System.Reflection;
 
-namespace Benchmarkator
+namespace Benchmarkator;
+
+class Program
 {
-    class Program
-    {
-        static void Main(string[] args) =>
-            BenchmarkSwitcher
-                .FromAssemblies(new[]
-                {
+    static void Main(string[] args) =>
+        BenchmarkSwitcher
+            .FromAssemblies(new[]
+            {
                     typeof(Program).Assembly,
                     Assembly.Load("Benchmarkator.Collections"),
                     Assembly.Load("Benchmarkator.Json"),
                     Assembly.Load("Benchmarkator.MongoDb")
-                })
-                .Run(args);
-    }
+            })
+            .Run(args);
 }

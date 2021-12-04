@@ -3,70 +3,69 @@ using System.Linq;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Order;
 
-namespace Benchmarkator.Bitmap
+namespace Benchmarkator.Bitmap;
+
+[Orderer(SummaryOrderPolicy.FastestToSlowest)]
+public class BitmapSequentialContainsTrue
 {
-    [Orderer(SummaryOrderPolicy.FastestToSlowest)]
-    public class BitmapSequentialContainsTrue
+    [Params(32, 1024)]
+    public int Length;
+
+    private System.Collections.BitArray _bitArray = null!;
+    private Dictionary<int, bool> _map = null!;
+    private HashSet<int> _set = null!;
+
+    [GlobalSetup]
+    public void Setup()
     {
-        [Params(32, 1024)]
-        public int Length;
+        // only `true` values are stored, missing value means bit is not set
+        _bitArray = new System.Collections.BitArray(Length, true);
 
-        private System.Collections.BitArray _bitArray = null!;
-        private Dictionary<int, bool> _map = null!;
-        private HashSet<int> _set = null!;
+        _map = new Dictionary<int, bool>(
+            Enumerable
+                .Range(0, Length)
+                .Select(v => KeyValuePair.Create(v, true)));
 
-        [GlobalSetup]
-        public void Setup()
+        _set = new HashSet<int>(
+            Enumerable.Range(0, Length));
+    }
+
+    [Benchmark]
+    public bool BitArrayContains()
+    {
+        var contains = false;
+        for (var i = 0; i < Length; i++)
         {
-            // only `true` values are stored, missing value means bit is not set
-            _bitArray = new System.Collections.BitArray(Length, true);
-
-            _map = new Dictionary<int, bool>(
-                Enumerable
-                    .Range(0, Length)
-                    .Select(v => KeyValuePair.Create(v, true)));
-
-            _set = new HashSet<int>(
-                Enumerable.Range(0, Length));
+            // or: `_bitArray[i]`
+            contains |= _bitArray.Get(i);
         }
 
-        [Benchmark]
-        public bool BitArrayContains()
-        {
-            var contains = false;
-            for (var i = 0; i < Length; i++)
-            {
-                // or: `_bitArray[i]`
-                contains |= _bitArray.Get(i);
-            }
+        return contains;
+    }
 
-            return contains;
+    [Benchmark]
+    public bool DictionaryContains()
+    {
+        var contains = false;
+        for (var i = 0; i < Length; i++)
+        {
+            // NB! value is `true`, see setup
+            // (alternatively: `_map.ContainsKey(i)`)
+            contains |= _map[i];
         }
 
-        [Benchmark]
-        public bool DictionaryContains()
-        {
-            var contains = false;
-            for (var i = 0; i < Length; i++)
-            {
-                // NB! value is `true`, see setup
-                // (alternatively: `_map.ContainsKey(i)`)
-                contains |= _map[i];
-            }
+        return contains;
+    }
 
-            return contains;
+    [Benchmark]
+    public bool SetContains()
+    {
+        var contains = false;
+        for (var i = 0; i < Length; i++)
+        {
+            contains |= _set.Contains(i);
         }
 
-        [Benchmark]
-        public bool SetContains()
-        {
-            var contains = false;
-            for (var i = 0; i < Length; i++)
-            {
-                contains |= _set.Contains(i);
-            }
-
-            return contains;
-        }
+        return contains;
     }
 }

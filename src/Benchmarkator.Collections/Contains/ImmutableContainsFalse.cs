@@ -3,172 +3,171 @@ using System.Linq;
 using Benchmarkator.Generator;
 using BenchmarkDotNet.Attributes;
 
-namespace System.Collections
+namespace System.Collections;
+
+[GenericTypeArguments(typeof(int))]
+[GenericTypeArguments(typeof(string))]
+public class ImmutableContainsFalse<T>
+    where T : notnull, IEquatable<T>
 {
-    [GenericTypeArguments(typeof(int))]
-    [GenericTypeArguments(typeof(string))]
-    public class ImmutableContainsFalse<T>
-        where T : notnull, IEquatable<T>
+    private T[] _notFound = null!;
+
+    private ImmutableArray<T> _immutableArray;
+    private ImmutableHashSet<T> _immutableHashSet = null!;
+    private ImmutableList<T> _immutableList = null!;
+    private ImmutableSortedSet<T> _immutableSortedSet = null!;
+    private LanguageExt.Arr<T> _langExtImmutableArray;
+    private LanguageExt.HashSet<T> _langExtImmutableHashSet;
+    private LanguageExt.Lst<T> _langExtImmutableList;
+    private LanguageExt.Set<T> _langExtImmutableSet;
+
+    [Params(512, 8192)]
+    public int Size;
+
+    [GlobalSetup]
+    public void Setup()
     {
-        private T[] _notFound = null!;
+        T[] values = ValuesGenerator.Instance.GenerateUniqueValues<T>(Size * 2);
 
-        private ImmutableArray<T> _immutableArray;
-        private ImmutableHashSet<T> _immutableHashSet = null!;
-        private ImmutableList<T> _immutableList = null!;
-        private ImmutableSortedSet<T> _immutableSortedSet = null!;
-        private LanguageExt.Arr<T> _langExtImmutableArray;
-        private LanguageExt.HashSet<T> _langExtImmutableHashSet;
-        private LanguageExt.Lst<T> _langExtImmutableList;
-        private LanguageExt.Set<T> _langExtImmutableSet;
+        _notFound = values
+            .Take(Size)
+            .ToArray();
 
-        [Params(512, 8192)]
-        public int Size;
+        var secondHalf = values
+            .Skip(Size)
+            .Take(Size)
+            .ToArray();
 
-        [GlobalSetup]
-        public void Setup()
+        // corefx
+        _immutableArray = Immutable.ImmutableArray.CreateRange<T>(secondHalf);
+        _immutableHashSet = Immutable.ImmutableHashSet.CreateRange<T>(secondHalf);
+        _immutableList = Immutable.ImmutableList.CreateRange<T>(secondHalf);
+        _immutableSortedSet = Immutable.ImmutableSortedSet.CreateRange<T>(secondHalf);
+
+        // LanguageExt.Core
+        _langExtImmutableArray = new LanguageExt.Arr<T>().AddRange(secondHalf);
+        _langExtImmutableHashSet = new LanguageExt.HashSet<T>().AddRange(secondHalf);
+        _langExtImmutableList = new LanguageExt.Lst<T>().AddRange(secondHalf);
+        _langExtImmutableSet = new LanguageExt.Set<T>(secondHalf);
+    }
+
+    [Benchmark]
+    public bool ImmutableArray()
+    {
+        bool result = default;
+        ImmutableArray<T> collection = _immutableArray;
+        T[] notFound = _notFound;
+
+        for (int i = 0; i < notFound.Length; i++)
         {
-            T[] values = ValuesGenerator.Instance.GenerateUniqueValues<T>(Size * 2);
-
-            _notFound = values
-                .Take(Size)
-                .ToArray();
-
-            var secondHalf = values
-                .Skip(Size)
-                .Take(Size)
-                .ToArray();
-
-            // corefx
-            _immutableArray = Immutable.ImmutableArray.CreateRange<T>(secondHalf);
-            _immutableHashSet = Immutable.ImmutableHashSet.CreateRange<T>(secondHalf);
-            _immutableList = Immutable.ImmutableList.CreateRange<T>(secondHalf);
-            _immutableSortedSet = Immutable.ImmutableSortedSet.CreateRange<T>(secondHalf);
-
-            // LanguageExt.Core
-            _langExtImmutableArray = new LanguageExt.Arr<T>().AddRange(secondHalf);
-            _langExtImmutableHashSet = new LanguageExt.HashSet<T>().AddRange(secondHalf);
-            _langExtImmutableList = new LanguageExt.Lst<T>().AddRange(secondHalf);
-            _langExtImmutableSet = new LanguageExt.Set<T>(secondHalf);
+            result ^= collection.Contains(notFound[i]);
         }
 
-        [Benchmark]
-        public bool ImmutableArray()
+        return result;
+    }
+
+    [Benchmark]
+    public bool ImmutableHashSet()
+    {
+        bool result = default;
+        ImmutableHashSet<T> collection = _immutableHashSet;
+        T[] notFound = _notFound;
+
+        for (int i = 0; i < notFound.Length; i++)
         {
-            bool result = default;
-            ImmutableArray<T> collection = _immutableArray;
-            T[] notFound = _notFound;
-
-            for (int i = 0; i < notFound.Length; i++)
-            {
-                result ^= collection.Contains(notFound[i]);
-            }
-
-            return result;
+            result ^= collection.Contains(notFound[i]);
         }
 
-        [Benchmark]
-        public bool ImmutableHashSet()
+        return result;
+    }
+
+    [Benchmark]
+    public bool ImmutableList()
+    {
+        bool result = default;
+        ImmutableList<T> collection = _immutableList;
+        T[] notFound = _notFound;
+
+        for (int i = 0; i < notFound.Length; i++)
         {
-            bool result = default;
-            ImmutableHashSet<T> collection = _immutableHashSet;
-            T[] notFound = _notFound;
-
-            for (int i = 0; i < notFound.Length; i++)
-            {
-                result ^= collection.Contains(notFound[i]);
-            }
-
-            return result;
+            result ^= collection.Contains(notFound[i]);
         }
 
-        [Benchmark]
-        public bool ImmutableList()
+        return result;
+    }
+
+    [Benchmark]
+    public bool ImmutableSortedSet()
+    {
+        bool result = default;
+        ImmutableSortedSet<T> collection = _immutableSortedSet;
+        T[] notFound = _notFound;
+
+        for (int i = 0; i < notFound.Length; i++)
         {
-            bool result = default;
-            ImmutableList<T> collection = _immutableList;
-            T[] notFound = _notFound;
-
-            for (int i = 0; i < notFound.Length; i++)
-            {
-                result ^= collection.Contains(notFound[i]);
-            }
-
-            return result;
+            result ^= collection.Contains(notFound[i]);
         }
 
-        [Benchmark]
-        public bool ImmutableSortedSet()
+        return result;
+    }
+
+    [Benchmark]
+    public bool LanguageExtArr()
+    {
+        bool result = default;
+        LanguageExt.Arr<T> collection = _langExtImmutableArray;
+        T[] notFound = _notFound;
+
+        for (int i = 0; i < notFound.Length; i++)
         {
-            bool result = default;
-            ImmutableSortedSet<T> collection = _immutableSortedSet;
-            T[] notFound = _notFound;
-
-            for (int i = 0; i < notFound.Length; i++)
-            {
-                result ^= collection.Contains(notFound[i]);
-            }
-
-            return result;
+            result ^= collection.Contains(notFound[i]);
         }
 
-        [Benchmark]
-        public bool LanguageExtArr()
+        return result;
+    }
+
+    [Benchmark]
+    public bool LanguageExtHashSet()
+    {
+        bool result = default;
+        LanguageExt.HashSet<T> collection = _langExtImmutableHashSet;
+        T[] notFound = _notFound;
+
+        for (int i = 0; i < notFound.Length; i++)
         {
-            bool result = default;
-            LanguageExt.Arr<T> collection = _langExtImmutableArray;
-            T[] notFound = _notFound;
-
-            for (int i = 0; i < notFound.Length; i++)
-            {
-                result ^= collection.Contains(notFound[i]);
-            }
-
-            return result;
+            result ^= collection.Contains(notFound[i]);
         }
 
-        [Benchmark]
-        public bool LanguageExtHashSet()
+        return result;
+    }
+
+    [Benchmark]
+    public bool LanguageExtLst()
+    {
+        bool result = default;
+        LanguageExt.Lst<T> collection = _langExtImmutableList;
+        T[] notFound = _notFound;
+
+        for (int i = 0; i < notFound.Length; i++)
         {
-            bool result = default;
-            LanguageExt.HashSet<T> collection = _langExtImmutableHashSet;
-            T[] notFound = _notFound;
-
-            for (int i = 0; i < notFound.Length; i++)
-            {
-                result ^= collection.Contains(notFound[i]);
-            }
-
-            return result;
+            result ^= collection.Contains(notFound[i]);
         }
 
-        [Benchmark]
-        public bool LanguageExtLst()
+        return result;
+    }
+
+    [Benchmark]
+    public bool LanguageExtSet()
+    {
+        bool result = default;
+        LanguageExt.Set<T> collection = _langExtImmutableSet;
+        T[] notFound = _notFound;
+
+        for (int i = 0; i < notFound.Length; i++)
         {
-            bool result = default;
-            LanguageExt.Lst<T> collection = _langExtImmutableList;
-            T[] notFound = _notFound;
-
-            for (int i = 0; i < notFound.Length; i++)
-            {
-                result ^= collection.Contains(notFound[i]);
-            }
-
-            return result;
+            result ^= collection.Contains(notFound[i]);
         }
 
-        [Benchmark]
-        public bool LanguageExtSet()
-        {
-            bool result = default;
-            LanguageExt.Set<T> collection = _langExtImmutableSet;
-            T[] notFound = _notFound;
-
-            for (int i = 0; i < notFound.Length; i++)
-            {
-                result ^= collection.Contains(notFound[i]);
-            }
-
-            return result;
-        }
+        return result;
     }
 }

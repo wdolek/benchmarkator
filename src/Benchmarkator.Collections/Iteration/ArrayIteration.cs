@@ -3,110 +3,109 @@ using System.Runtime.CompilerServices;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Order;
 
-namespace Benchmarkator.Collections.Iteration
+namespace Benchmarkator.Collections.Iteration;
+
+[Orderer(SummaryOrderPolicy.FastestToSlowest)]
+public class ArrayIteration
 {
-    [Orderer(SummaryOrderPolicy.FastestToSlowest)]
-    public class ArrayIteration
+    [Params(4096)]
+    public int Length;
+
+    private int[] _data = null!;
+
+    [GlobalSetup]
+    public void Setup()
     {
-        [Params(4096)]
-        public int Length;
+        _data = Enumerable.Range(0, Length).ToArray();
+    }
 
-        private int[] _data = null!;
-
-        [GlobalSetup]
-        public void Setup()
+    [Benchmark]
+    public int ForLoopAccessIndex()
+    {
+        var arr = _data;
+        var item = 0;
+        for (var i = 0; i < arr.Length; i++)
         {
-            _data = Enumerable.Range(0, Length).ToArray();
+            item = arr[i];
         }
 
-        [Benchmark]
-        public int ForLoopAccessIndex()
+        return item;
+    }
+
+    [Benchmark]
+    public unsafe int ForLoopAccessPtr()
+    {
+        var arr = _data;
+        var item = 0;
+
+        // to get value on given index, `i` is added to address of first item
+        // (`i` offsets pointer by size of `int*`)
+        fixed (int* a = &arr[0])
         {
-            var arr = _data;
-            var item = 0;
             for (var i = 0; i < arr.Length; i++)
             {
-                item = arr[i];
+                item = *(a + i);
             }
-
-            return item;
         }
 
-        [Benchmark]
-        public unsafe int ForLoopAccessPtr()
+        return item;
+    }
+
+    [Benchmark]
+    public int ForLoopAccessRef()
+    {
+        var arr = _data;
+        var item = 0;
+
+        // to get value on given index, `i` is added to reference to first item
+        // (`i` offsets pointer by size of `ref int`)
+        ref var first = ref arr[0];
+        for (var i = 0; i < arr.Length; i++)
         {
-            var arr = _data;
-            var item = 0;
-
-            // to get value on given index, `i` is added to address of first item
-            // (`i` offsets pointer by size of `int*`)
-            fixed (int* a = &arr[0])
-            {
-                for (var i = 0; i < arr.Length; i++)
-                {
-                    item = *(a + i);
-                }
-            }
-
-            return item;
+            item = Unsafe.Add(ref first, i);
         }
 
-        [Benchmark]
-        public int ForLoopAccessRef()
+        return item;
+    }
+
+    [Benchmark]
+    public unsafe int WhileLoopAccessPtr()
+    {
+        var arr = _data;
+        var item = 0;
+
+        // move `tmp` in array, from first to last address
+        // (pointer to `tmp` is moved to next field each iteration)
+        fixed (int* a = &arr[0])
         {
-            var arr = _data;
-            var item = 0;
-
-            // to get value on given index, `i` is added to reference to first item
-            // (`i` offsets pointer by size of `ref int`)
-            ref var first = ref arr[0];
-            for (var i = 0; i < arr.Length; i++)
+            var last = a + arr.Length;
+            var tmp = a;
+            while (tmp < last)
             {
-                item = Unsafe.Add(ref first, i);
+                item = *tmp;
+                tmp += 1;
             }
-
-            return item;
         }
 
-        [Benchmark]
-        public unsafe int WhileLoopAccessPtr()
+        return item;
+    }
+
+    [Benchmark]
+    public int WhileLoopAccessRef()
+    {
+        var arr = _data;
+        var item = 0;
+
+        // move `temp` in array, from first to last reference
+        // (reference to `tmp` is moved to next field each iteration)
+        ref var temp = ref arr[0];
+        ref var last = ref arr[arr.Length - 1];
+        while (Unsafe.IsAddressLessThan(ref temp, ref last) || Unsafe.AreSame(ref temp, ref last))
         {
-            var arr = _data;
-            var item = 0;
-
-            // move `tmp` in array, from first to last address
-            // (pointer to `tmp` is moved to next field each iteration)
-            fixed (int* a = &arr[0])
-            {
-                var last = a + arr.Length;
-                var tmp = a;
-                while (tmp < last)
-                {
-                    item = *tmp;
-                    tmp += 1;
-                }
-            }
-
-            return item;
+            item = temp;
+            temp = ref Unsafe.Add(ref temp, 1);
         }
 
-        [Benchmark]
-        public int WhileLoopAccessRef()
-        {
-            var arr = _data;
-            var item = 0;
-
-            // move `temp` in array, from first to last reference
-            // (reference to `tmp` is moved to next field each iteration)
-            ref var temp = ref arr[0];
-            ref var last = ref arr[arr.Length - 1];
-            while (Unsafe.IsAddressLessThan(ref temp, ref last) || Unsafe.AreSame(ref temp, ref last))
-            {
-                item = temp;
-                temp = ref Unsafe.Add(ref temp, 1);
-            }
-
-            return item;
-        }
+        return item;
     }
 }

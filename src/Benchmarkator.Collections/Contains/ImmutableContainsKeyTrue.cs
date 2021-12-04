@@ -4,97 +4,96 @@ using System.Linq;
 using Benchmarkator.Generator;
 using BenchmarkDotNet.Attributes;
 
-namespace System.Collections
+namespace System.Collections;
+
+[GenericTypeArguments(typeof(int), typeof(int))]
+[GenericTypeArguments(typeof(string), typeof(string))]
+public class ImmutableContainsKeyTrue<TKey, TValue>
+    where TKey : notnull
 {
-    [GenericTypeArguments(typeof(int), typeof(int))]
-    [GenericTypeArguments(typeof(string), typeof(string))]
-    public class ImmutableContainsKeyTrue<TKey, TValue>
-        where TKey : notnull
+    private TKey[] _found = null!;
+    private Dictionary<TKey, TValue> _source = null!;
+
+    private ImmutableDictionary<TKey, TValue> _immutableDictionary = null!;
+    private ImmutableSortedDictionary<TKey, TValue> _immutableSortedDictionary = null!;
+    private LanguageExt.HashMap<TKey, TValue> _langExtHashMap;
+    private LanguageExt.Map<TKey, TValue> _langExtMap;
+
+    [Params(512, 8192)]
+    public int Size;
+
+    [GlobalSetup]
+    public void Setup()
     {
-        private TKey[] _found = null!;
-        private Dictionary<TKey, TValue> _source = null!;
+        _found = ValuesGenerator.Instance.GenerateUniqueValues<TKey>(Size);
+        _source = _found.ToDictionary(item => item, item => (TValue)(object)item);
 
-        private ImmutableDictionary<TKey, TValue> _immutableDictionary = null!;
-        private ImmutableSortedDictionary<TKey, TValue> _immutableSortedDictionary = null!;
-        private LanguageExt.HashMap<TKey, TValue> _langExtHashMap;
-        private LanguageExt.Map<TKey, TValue> _langExtMap;
+        // corefx
+        _immutableDictionary = Immutable.ImmutableDictionary.CreateRange<TKey, TValue>(_source);
+        _immutableSortedDictionary = Immutable.ImmutableSortedDictionary.CreateRange<TKey, TValue>(_source);
 
-        [Params(512, 8192)]
-        public int Size;
+        // LanguageExt.Core
+        _langExtHashMap = new LanguageExt.HashMap<TKey, TValue>().AddRange(_source);
+        _langExtMap = new LanguageExt.Map<TKey, TValue>().AddRange(_source);
+    }
 
-        [GlobalSetup]
-        public void Setup()
+    [Benchmark]
+    public bool ImmutableDictionary()
+    {
+        bool result = default;
+        var collection = _immutableDictionary;
+        var found = _found;
+
+        for (int i = 0; i < found.Length; i++)
         {
-            _found = ValuesGenerator.Instance.GenerateUniqueValues<TKey>(Size);
-            _source = _found.ToDictionary(item => item, item => (TValue)(object)item);
-
-            // corefx
-            _immutableDictionary = Immutable.ImmutableDictionary.CreateRange<TKey, TValue>(_source);
-            _immutableSortedDictionary = Immutable.ImmutableSortedDictionary.CreateRange<TKey, TValue>(_source);
-
-            // LanguageExt.Core
-            _langExtHashMap = new LanguageExt.HashMap<TKey, TValue>().AddRange(_source);
-            _langExtMap = new LanguageExt.Map<TKey, TValue>().AddRange(_source);
+            result ^= collection.ContainsKey(found[i]);
         }
 
-        [Benchmark]
-        public bool ImmutableDictionary()
+        return result;
+    }
+
+    [Benchmark]
+    public bool ImmutableSortedDictionary()
+    {
+        bool result = default;
+        var collection = _immutableSortedDictionary;
+        var found = _found;
+
+        for (int i = 0; i < found.Length; i++)
         {
-            bool result = default;
-            var collection = _immutableDictionary;
-            var found = _found;
-
-            for (int i = 0; i < found.Length; i++)
-            {
-                result ^= collection.ContainsKey(found[i]);
-            }
-
-            return result;
+            result ^= collection.ContainsKey(found[i]);
         }
 
-        [Benchmark]
-        public bool ImmutableSortedDictionary()
+        return result;
+    }
+
+    [Benchmark]
+    public bool LanguageExtHashMap()
+    {
+        bool result = default;
+        var collection = _langExtHashMap;
+        var found = _found;
+
+        for (int i = 0; i < found.Length; i++)
         {
-            bool result = default;
-            var collection = _immutableSortedDictionary;
-            var found = _found;
-
-            for (int i = 0; i < found.Length; i++)
-            {
-                result ^= collection.ContainsKey(found[i]);
-            }
-
-            return result;
+            result ^= collection.ContainsKey(found[i]);
         }
 
-        [Benchmark]
-        public bool LanguageExtHashMap()
+        return result;
+    }
+
+    [Benchmark]
+    public bool LanguageExtMap()
+    {
+        bool result = default;
+        var collection = _langExtMap;
+        var found = _found;
+
+        for (int i = 0; i < found.Length; i++)
         {
-            bool result = default;
-            var collection = _langExtHashMap;
-            var found = _found;
-
-            for (int i = 0; i < found.Length; i++)
-            {
-                result ^= collection.ContainsKey(found[i]);
-            }
-
-            return result;
+            result ^= collection.ContainsKey(found[i]);
         }
 
-        [Benchmark]
-        public bool LanguageExtMap()
-        {
-            bool result = default;
-            var collection = _langExtMap;
-            var found = _found;
-
-            for (int i = 0; i < found.Length; i++)
-            {
-                result ^= collection.ContainsKey(found[i]);
-            }
-
-            return result;
-        }
+        return result;
     }
 }
