@@ -1,3 +1,11 @@
+## Converting `S.T.Json.JsonDocument` to `MongoDB.Bson.BsonDocument`
+
+What's the fastest way converting loose `JsonDocument` to `BsonDocument`? Let's find out:
+
+- serializing `JsonDocument` to string, and then parsing string to `BsonDocument`
+- using `JsonDocument.WriteTo` to write serialized document to buffer, creating string out of that buffer and then parsing string to `BsonDocument`
+- using `JsonDocument.WriteTo` to write serialized document to buffer and then using same buffer do deserialize `BsonDocument` out of it
+
 ``` ini
 
 BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19044.1387 (21H2)
