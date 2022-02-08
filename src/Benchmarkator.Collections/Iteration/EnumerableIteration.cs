@@ -6,11 +6,11 @@ namespace Benchmarkator.Collections.Iteration;
 
 public class EnumerableIteration
 {
-    private const int NumOfItems = 10_000;
+    private const int NumOfItems = 100_000;
 
     private IEnumerable<int> _yieldEnumerable = null!;
     private IEnumerable<int> _rangeEnumerable = null!;
-    private int[] _arrayEnumerable = null!;
+    private IEnumerable<int> _arrayEnumerable = null!;
 
     [GlobalSetup]
     public void Setup()

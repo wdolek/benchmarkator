@@ -6,8 +6,8 @@ When enumerating `IEnumerable`, performance can actually differ based on impleme
 - `Enumerable.Range` enumerable
 - array iteration
 
-|          Method |      Mean |     Error |    StdDev |    Median |
-|---------------- |----------:|----------:|----------:|----------:|
-| YieldEnumerable | 53.532 μs | 1.8368 μs | 4.9972 μs | 51.627 μs |
-| RangeEnumerable | 47.877 μs | 0.8422 μs | 0.9362 μs | 47.611 μs |
-| ArrayEnumerable |  3.273 μs | 0.0650 μs | 0.1467 μs |  3.248 μs |
+|          Method |     Mean |    Error |   StdDev |   Median |
+|---------------- |---------:|---------:|---------:|---------:|
+| YieldEnumerable | 557.9 μs | 22.53 μs | 63.56 μs | 529.8 μs |
+| RangeEnumerable | 541.9 μs | 21.01 μs | 60.62 μs | 528.6 μs |
+| ArrayEnumerable | 537.6 μs | 24.27 μs | 68.45 μs | 505.1 μs |
