@@ -23,6 +23,8 @@ Not all benchmarks may be listed, check source directly.
   comparing approaches to format string in combination of `string.Substring`
 - [Using lambdas](src/Benchmarkator/Lambdinator/LambdaUsage.md):
   comparing different ways how to write lambdas/anonymous functions
+- [Throw or return](src/Benchmarkator/Exceptions/ThrowOrReturn.md):
+  demonstrating price of throwing an exception
 
 #### JSON
 
