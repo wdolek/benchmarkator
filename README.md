@@ -21,6 +21,8 @@ Not all benchmarks may be listed, check source directly.
   comparing modulo with logical and when dividing by even number
 - [Formatting string while rendering just part of it](src/Benchmarkator/Stringator/StringFormatSubstring.md):
   comparing approaches to format string in combination of `string.Substring`
+- [Using lambdas](src/Benchmarkator/Lambdinator/LambdaUsage.md):
+  comparing different ways how to write lambdas/anonymous functions
 
 #### JSON
 
