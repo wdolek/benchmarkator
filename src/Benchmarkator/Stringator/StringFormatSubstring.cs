@@ -40,7 +40,7 @@ public class StringFormatSubstring
         var local = _data;
         var length = _length;
         
-        return string.Format("{0}", local.Substring(0, length));
+        return string.Format("In short, {0}", local.Substring(0, length));
     }
 
     [Benchmark]
@@ -50,7 +50,7 @@ public class StringFormatSubstring
         var local = _data;
         var length = _length;
 
-        return string.Format($"{local.Substring(0, length)}");
+        return string.Format($"In short, {local.Substring(0, length)}");
     }
 
     [Benchmark]
@@ -60,7 +60,7 @@ public class StringFormatSubstring
         var local = _data;
         var length = _length;
         
-        return string.Format("{0}", local[..length]);
+        return string.Format("In short, {0}", local[..length]);
     }
 
     [Benchmark]
@@ -70,7 +70,7 @@ public class StringFormatSubstring
         var local = _data;
         var length = _length;
         
-        return string.Format($"{local[..length]}");
+        return string.Format($"In short, {local[..length]}");
     }
 
     [Benchmark]
@@ -80,7 +80,7 @@ public class StringFormatSubstring
         var local = _data;
         var length = _length;
         
-        return string.Format($"{local.AsSpan(0, length)}");
+        return string.Format($"In short, {local.AsSpan(0, length)}");
     }
 
     [Benchmark]
@@ -90,7 +90,8 @@ public class StringFormatSubstring
         var local = _data;
         var length = _length;
 
-        var builder = new DefaultInterpolatedStringHandler(0, 1);
+        var builder = new DefaultInterpolatedStringHandler(1, 1);
+        builder.AppendLiteral("In short, ");
         builder.AppendFormatted(local.AsSpan(0, length));
 
         return builder.ToStringAndClear();
