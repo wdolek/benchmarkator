@@ -1,6 +1,6 @@
 ﻿## Divisible by two
 
-Should you use modulo? Should you use logical and? Is this gonna be JITted anyway?
+Should you use modulo? Should you use _logical and_? Is this gonna be JITted anyway?
 See [DivisibleByTwo.cs](./DivisibleByTwo.cs) for implementation details (shockinlgy nothing ... surprising).
 
 ``` ini

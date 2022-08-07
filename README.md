@@ -18,7 +18,7 @@ Not all benchmarks may be listed, check source directly.
 - [Bitmap access](src/Benchmarkator/Bitmap/Bitmap.md):
   determining the fastest approach for implementing bitmap
 - [Division by `n`](src/Benchmarkator/Division/DivisibleByTwo.md):
-  comparing modulo with logical and when dividing by even number
+  comparing modulo with logical AND when dividing by even number
 - [Formatting string while rendering just part of it](src/Benchmarkator/Stringator/StringFormatSubstring.md):
   comparing approaches to format string in combination of `string.Substring`
 - [Using lambdas](src/Benchmarkator/Lambdinator/LambdaUsage.md):
@@ -57,7 +57,7 @@ Not all benchmarks may be listed, check source directly.
 dotnet run -c Release --project src/Benchmarkator -f net6.0
 ```
 
-Runnint benchmarks related to `System.Collections`:
+... so running benchmarks related to `System.Collections` is done using command:
 
 ```
 dotnet run -c Release --project src/Benchmarkator -f net6.0 --filter System.Collections*
