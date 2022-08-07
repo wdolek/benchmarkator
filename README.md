@@ -1,11 +1,11 @@
 ## Benchmarkator: benchmarks and stuff
 
 This project is playground for various benchmarks. Creating benchmark is much easier than reading IL and 
-_guessing_ performance characteristics. Be aware, that IL is just one part of puzzle, keep in mind there's
+_guessing_ performance characteristics. Be aware that IL is just one part of puzzle, keep in mind there's
 JITter as well and other factors, such as CPU caching, GC, ...
 
-If you know answer why benchmark results with particular numbers, feel free to submit an issue or PR with
-explanation.
+If you can explain benchmark results/you can link to documentation, feel free to submit an issue or PR with
+explanation/link.
 
 Only results are listed - interpretation of results is up to the readers themselves.
 
@@ -14,7 +14,7 @@ Only results are listed - interpretation of results is up to the readers themsel
 Not all benchmarks may be listed, check source directly.
 
 - [Get Assembly Version](src/Benchmarkator/Assemblinator/GetAssemblyVersion.md):
-  demonstrating how impactful it is to get custom assembly attribute over and over
+  demonstrating how impactful it is to get custom attribute over and over
 - [Bitmap access](src/Benchmarkator/Bitmap/Bitmap.md):
   determining the fastest approach for implementing bitmap
 - [Division by `n`](src/Benchmarkator/Division/DivisibleByTwo.md):
