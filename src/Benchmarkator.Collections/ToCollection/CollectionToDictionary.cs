@@ -44,7 +44,7 @@ public class CollectionToDictionary
     }
 
     [Benchmark]
-    public Dictionary<int, int> ToAggregateLinq()
+    public Dictionary<int, int> AggregateLinq()
     {
         var local = _collection;
         return local.Aggregate(
