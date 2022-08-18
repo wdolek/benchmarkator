@@ -2,10 +2,12 @@
 using System.Linq;
 using Benchmarkator.Generator;
 using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Order;
 
 namespace Benchmarkator.Collections.ToCollection;
 
 [MemoryDiagnoser]
+[Orderer(SummaryOrderPolicy.FastestToSlowest)]
 public class CollectionToDictionary
 {
     private List<int> _collection = null!;
@@ -23,11 +25,12 @@ public class CollectionToDictionary
     public Dictionary<int, int> ToDictionarySimple()
     {
         var local = _collection;
-        var dict = new Dictionary<int, int>();
 
+        var dict = new Dictionary<int, int>(local.Count);
         for (var i = 0; i < local.Count; i++)
         {
-            dict.TryAdd(i, i + 1);
+            var value = local[i];
+            dict.Add(value, value + 1);
         }
 
         return dict;
