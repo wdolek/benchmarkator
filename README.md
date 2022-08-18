@@ -1,6 +1,6 @@
 ## Benchmarkator: benchmarks and stuff
 
-This project is playground for various benchmarks. Creating benchmark is much easier than reading IL and 
+This project is playground for various benchmarks. Creating benchmark is much easier than reading IL and
 _guessing_ performance characteristics. Be aware that IL is just one part of puzzle, keep in mind there's
 JITter as well and other factors, such as CPU caching, GC, ...
 
@@ -43,6 +43,8 @@ Not all benchmarks may be listed, check source directly.
   benchmark of lookup of structured value (e.g. `Id`), comparing array, `List<T>` and `Dictionary<TKey, TValue>`
 - [`.ToArray` vs `.ToList`](src/Benchmarkator.Collections/ToCollection/ToCollection.md):
   bemchmark comparing performance of `.ToArray()` and `.ToList()`
+- [`Collection ToDictionary`](src/Benchmarkator.Collections/ToDictionary/ToDictionary.md):
+  benchmark of creating dictionary out of collection using LINQ and simple implementation
 
 #### MongoDB
 
