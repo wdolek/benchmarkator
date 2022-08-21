@@ -1,7 +1,7 @@
 ﻿using System.Collections.Immutable;
 using BenchmarkDotNet.Attributes;
 
-namespace System.Collections;
+namespace Benchmarkator.Collections.Create;
 
 [GenericTypeArguments(typeof(int))]
 [GenericTypeArguments(typeof(string))]
@@ -9,28 +9,28 @@ public class CtorDefaultSize<T>
     where T : notnull
 {
     [Benchmark]
-    public ImmutableArray<T> ImmutableArray() => Immutable.ImmutableArray.Create<T>();
+    public ImmutableArray<T> ImmutableArray() => System.Collections.Immutable.ImmutableArray.Create<T>();
 
     [Benchmark]
-    public ImmutableDictionary<T, T> ImmutableDictionary() => Immutable.ImmutableDictionary.Create<T, T>();
+    public ImmutableDictionary<T, T> ImmutableDictionary() => System.Collections.Immutable.ImmutableDictionary.Create<T, T>();
 
     [Benchmark]
-    public ImmutableHashSet<T> ImmutableHashSet() => Immutable.ImmutableHashSet.Create<T>();
+    public ImmutableHashSet<T> ImmutableHashSet() => System.Collections.Immutable.ImmutableHashSet.Create<T>();
 
     [Benchmark]
-    public ImmutableList<T> ImmutableList() => Immutable.ImmutableList.Create<T>();
+    public ImmutableList<T> ImmutableList() => System.Collections.Immutable.ImmutableList.Create<T>();
 
     [Benchmark]
-    public ImmutableQueue<T> ImmutableQueue() => Immutable.ImmutableQueue.Create<T>();
+    public ImmutableQueue<T> ImmutableQueue() => System.Collections.Immutable.ImmutableQueue.Create<T>();
 
     [Benchmark]
-    public ImmutableStack<T> ImmutableStack() => Immutable.ImmutableStack.Create<T>();
+    public ImmutableStack<T> ImmutableStack() => System.Collections.Immutable.ImmutableStack.Create<T>();
 
     [Benchmark]
-    public ImmutableSortedDictionary<T, T> ImmutableSortedDictionary() => Immutable.ImmutableSortedDictionary.Create<T, T>();
+    public ImmutableSortedDictionary<T, T> ImmutableSortedDictionary() => System.Collections.Immutable.ImmutableSortedDictionary.Create<T, T>();
 
     [Benchmark]
-    public ImmutableSortedSet<T> ImmutableSortedSet() => Immutable.ImmutableSortedSet.Create<T>();
+    public ImmutableSortedSet<T> ImmutableSortedSet() => System.Collections.Immutable.ImmutableSortedSet.Create<T>();
 
     [Benchmark]
     public LanguageExt.Arr<T> LanguageExtArr() => new LanguageExt.Arr<T>();

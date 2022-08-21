@@ -1,9 +1,10 @@
-﻿using System.Collections.Immutable;
+﻿using System;
+using System.Collections.Immutable;
 using System.Linq;
 using Benchmarkator.Generator;
 using BenchmarkDotNet.Attributes;
 
-namespace System.Collections;
+namespace Benchmarkator.Collections.Contains;
 
 [GenericTypeArguments(typeof(int))]
 [GenericTypeArguments(typeof(string))]
@@ -39,10 +40,10 @@ public class ImmutableContainsFalse<T>
             .ToArray();
 
         // corefx
-        _immutableArray = Immutable.ImmutableArray.CreateRange<T>(secondHalf);
-        _immutableHashSet = Immutable.ImmutableHashSet.CreateRange<T>(secondHalf);
-        _immutableList = Immutable.ImmutableList.CreateRange<T>(secondHalf);
-        _immutableSortedSet = Immutable.ImmutableSortedSet.CreateRange<T>(secondHalf);
+        _immutableArray = System.Collections.Immutable.ImmutableArray.CreateRange<T>(secondHalf);
+        _immutableHashSet = System.Collections.Immutable.ImmutableHashSet.CreateRange<T>(secondHalf);
+        _immutableList = System.Collections.Immutable.ImmutableList.CreateRange<T>(secondHalf);
+        _immutableSortedSet = System.Collections.Immutable.ImmutableSortedSet.CreateRange<T>(secondHalf);
 
         // LanguageExt.Core
         _langExtImmutableArray = new LanguageExt.Arr<T>().AddRange(secondHalf);

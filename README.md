@@ -59,10 +59,10 @@ Not all benchmarks may be listed, check source directly.
 dotnet run -c Release --project src/Benchmarkator -f net6.0
 ```
 
-... so running benchmarks related to `System.Collections` is done using command:
+... so running benchmarks related to collections is done using command:
 
 ```
-dotnet run -c Release --project src/Benchmarkator -f net6.0 --filter System.Collections*
+dotnet run -c Release --project src/Benchmarkator -f net6.0 --filter Benchmarkator.Collections*
 ```
 
 More about running benchmarks: [BenchmarkDotNet | How to use console arguments](https://benchmarkdotnet.org/articles/guides/console-args.html).
