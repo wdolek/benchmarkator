@@ -19,32 +19,48 @@ Not all benchmarks may be listed, check source directly.
   determining the fastest approach for implementing bitmap
 - [Division by `n`](src/Benchmarkator/Division/DivisibleByTwo.md):
   comparing modulo with logical AND when dividing by even number
-- [Formatting string while rendering just part of it](src/Benchmarkator/Stringator/StringFormatSubstring.md):
-  comparing approaches to format string in combination of `string.Substring`
-- [Using lambdas](src/Benchmarkator/Lambdinator/LambdaUsage.md):
-  comparing different ways how to write lambdas/anonymous functions
 - [Throw or return](src/Benchmarkator/Exceptions/ThrowOrReturn.md):
   demonstrating price of throwing an exception
+- [Using lambdas](src/Benchmarkator/Lambdinator/LambdaUsage.md):
+  comparing different ways how to write lambdas/anonymous functions
+- [Formatting string while rendering just part of it](src/Benchmarkator/Stringator/StringFormatSubstring.md):
+  comparing approaches to format string in combination of `string.Substring`
+
+#### Collection benchmarks
+
+- [Add to collection](src/Benchmarkator.Collections/Add/AddToCollection.md):
+  comparing different ways to add entry to collection (List/Dictionary with default capacity and with capacity set to `n`)
+- [Add to `ConcurrentDictionary`](src/Benchmarkator.Collections/Add/RedundantConcurrentDictionary.md):
+  demonstrating price of adding to `ConcurrentDictionary` when concurrency is not needed (e.g. after refactoring)
+- [Collection Contains ...](src/Benchmarkator.Collections/Contains/ImmutableCollectionContains.md):
+  comparing `corefx` immutable collections with collections from `LanguageExt.Core`-
+- [Collection Create](src/Benchmarkator.Collections/Create/CreateCtor.md):
+  comparing `corefx` immutable collections instantiation/creation with `LanguageExt.Core` (`ctor`, `.Create`)
+- [Creating empty collection](src/Benchmarkator.Collections/Create/EmptyCollection.md):
+  comparison of creating empty `List` and `Dictionary`
+- [Array access](src/Benchmarkator.Collections/Iteration/ArrayIteration.md):
+  determining the fastest way to access array item (and way of iteration)
+- [Array/Array as `IEnumerable`/`List` `foreach`](src/Benchmarkator.Collections/Iteration/ArrayListForeachIteration.md):
+  difference between iterating over array and `List` using `foreach`
+- [Accessing array/`List<>` value using indexer](src/Benchmarkator.Collections/Iteration/CollectionIterationIndexerAccess.md):
+  comparison of accessing value via `[]` on array and `List<>`
+- [Deconstructing `KeyValuePair<,>`](src/Benchmarkator.Collections/Iteration/DictionaryDeconstructKvp.md):
+  finding difference of using key value pair deconstruction
+- [Differences enumerating `IEnumerable`](src/Benchmarkator.Collections/Iteration/EnumerableIteration.md):
+  demonstrating difference of `IEnumerable` implementation
+- [Enumerating `ImmutableArray` various way](src/Benchmarkator.Collections/Iteration/ImmutableArrayIteration.md):
+  finding difference of various enumeration approaches on `ImmutableArray`
+- [Collection Lookup](src/Benchmarkator.Collections/Lookup/ValueLookup.md):
+  benchmark of lookup of structured value (e.g. `Id`), comparing array, `List<T>` and `Dictionary<TKey, TValue>`
+- [Creating array or `List<>` from collection](src/Benchmarkator.Collections/ToCollection/ToCollection.md):
+  benchmark comparing performance of `.ToArray()` and `.ToList()`
+- [Creating `Dictionary<,>` from collection](src/Benchmarkator.Collections/ToDictionary/ToDictionary.md):
+  benchmark of creating dictionary out of collection using LINQ and simple implementation
 
 #### JSON
 
 - [JSON Deserialization](src/Benchmarkator.Json/Deserialization/JsonPayloadDeserialization.md):
   observing memory allocation by `StreamReader` buffer
-
-#### Collection benchmarks
-
-- [Array access](src/Benchmarkator.Collections/Iteration/ArrayIteration.md):
-  determining the fastest way to access array item (and way of iteration)
-- [Collection Contains ...](src/Benchmarkator.Collections/Contains/ImmutableCollectionContains.md):
-  comparing `corefx` immutable collections with collections from `LanguageExt.Core`
-- [Collection Create](src/Benchmarkator.Collections/Create/CreateCtor.md):
-  comparing `corefx` immutable collections instantiation/creation with `LanguageExt.Core` (`ctor`, `.Create`)
-- [Collection Lookup](src/Benchmarkator.Collections/Lookup/ValueLookup.md):
-  benchmark of lookup of structured value (e.g. `Id`), comparing array, `List<T>` and `Dictionary<TKey, TValue>`
-- [`.ToArray` vs `.ToList`](src/Benchmarkator.Collections/ToCollection/ToCollection.md):
-  bemchmark comparing performance of `.ToArray()` and `.ToList()`
-- [`Collection ToDictionary`](src/Benchmarkator.Collections/ToDictionary/ToDictionary.md):
-  benchmark of creating dictionary out of collection using LINQ and simple implementation
 
 #### MongoDB
 
