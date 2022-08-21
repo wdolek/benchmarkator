@@ -10,8 +10,12 @@ Intel Core i7-7820HQ CPU 2.90GHz (Kaby Lake), 1 CPU, 8 logical and 4 physical co
   [Host]     : .NET 6.0.8 (6.0.822.36306), X64 RyuJIT
   DefaultJob : .NET 6.0.8 (6.0.822.36306), X64 RyuJIT
 ```
-|                        Method |      Mean |     Error |    StdDev |    Median | Ratio | RatioSD |
-|------------------------------ |----------:|----------:|----------:|----------:|------:|--------:|
-|            &#39;Default capacity&#39; | 4.1372 ns | 0.1658 ns | 0.1551 ns | 4.1179 ns | 1.000 |    0.00 |
-|               &#39;Capacity of 0&#39; | 4.5195 ns | 0.1738 ns | 0.2260 ns | 4.4572 ns | 1.104 |    0.08 |
-| &#39;Single pre-created instance&#39; | 0.0032 ns | 0.0101 ns | 0.0084 ns | 0.0000 ns | 0.001 |    0.00 |
+|                        Method | Categories |      Mean |     Error |    StdDev |    Median | Ratio | RatioSD |
+|------------------------------ |----------- |----------:|----------:|----------:|----------:|------:|--------:|
+|            &#39;Default capacity&#39; |       List | 4.8004 ns | 0.1582 ns | 0.1480 ns | 4.8463 ns |  1.00 |    0.00 |
+|               &#39;Capacity of 0&#39; |       List | 4.2538 ns | 0.1572 ns | 0.1227 ns | 4.2917 ns |  0.89 |    0.03 |
+| &#39;Single pre-created instance&#39; |       List | 0.1082 ns | 0.0645 ns | 0.0603 ns | 0.1346 ns |  0.02 |    0.01 |
+|                               |            |           |           |           |           |       |         |
+|            &#39;Default capacity&#39; | Dictionary | 4.2503 ns | 0.0721 ns | 0.0639 ns | 4.2601 ns |  1.00 |    0.00 |
+|               &#39;Capacity of 0&#39; | Dictionary | 6.0897 ns | 0.1357 ns | 0.1203 ns | 6.1034 ns |  1.43 |    0.03 |
+| &#39;Single pre-created instance&#39; | Dictionary | 0.0987 ns | 0.0667 ns | 0.0624 ns | 0.1348 ns |  0.02 |    0.02 |
