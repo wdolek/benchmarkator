@@ -11,16 +11,16 @@ Besides simple iteration, other approaches than basic `for` loop are tested.
 For details, see [ArrayIteration.cs](./ArrayIteration.cs).
 
 ``` ini
-BenchmarkDotNet=v0.12.0, OS=Windows 10.0.18362
+BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19044.1889 (21H2)
 Intel Core i7-7820HQ CPU 2.90GHz (Kaby Lake), 1 CPU, 8 logical and 4 physical cores
-.NET Core SDK=3.0.100
-  [Host]     : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT
-  DefaultJob : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT
+.NET SDK=6.0.303
+  [Host]     : .NET 6.0.8 (6.0.822.36306), X64 RyuJIT
+  DefaultJob : .NET 6.0.8 (6.0.822.36306), X64 RyuJIT
 ```
 |             Method | Length |     Mean |     Error |    StdDev |
 |------------------- |------- |---------:|----------:|----------:|
-| WhileLoopAccessPtr |   4096 | 1.090 us | 0.0017 us | 0.0015 us |
-|   ForLoopAccessPtr |   4096 | 1.963 us | 0.0027 us | 0.0025 us |
-| ForLoopAccessIndex |   4096 | 1.963 us | 0.0080 us | 0.0067 us |
-|   ForLoopAccessRef |   4096 | 1.965 us | 0.0034 us | 0.0029 us |
-| WhileLoopAccessRef |   4096 | 2.167 us | 0.0066 us | 0.0061 us |
+| WhileLoopAccessPtr |   4096 | 1.207 μs | 0.0237 μs | 0.0333 μs |
+| WhileLoopAccessRef |   4096 | 1.215 μs | 0.0243 μs | 0.0325 μs |
+|   ForLoopAccessRef |   4096 | 2.010 μs | 0.0227 μs | 0.0212 μs |
+| ForLoopAccessIndex |   4096 | 2.103 μs | 0.0292 μs | 0.0273 μs |
+|   ForLoopAccessPtr |   4096 | 2.115 μs | 0.0324 μs | 0.0304 μs |

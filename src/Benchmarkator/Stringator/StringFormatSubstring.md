@@ -4,26 +4,23 @@ What if we want to format string but print just part of interpolated value? `str
 so let's find what we can do:
 
 ``` ini
-
-BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19044.1826 (21H2)
-Intel Core i7-7600U CPU 2.80GHz (Kaby Lake), 1 CPU, 4 logical and 2 physical cores
-.NET SDK=6.0.302
-  [Host]     : .NET 6.0.7 (6.0.722.32202), X64 RyuJIT
-  DefaultJob : .NET 6.0.7 (6.0.722.32202), X64 RyuJIT
-
-
+BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19044.1889 (21H2)
+Intel Core i7-7820HQ CPU 2.90GHz (Kaby Lake), 1 CPU, 8 logical and 4 physical cores
+.NET SDK=6.0.303
+  [Host]     : .NET 6.0.8 (6.0.822.36306), X64 RyuJIT
+  DefaultJob : .NET 6.0.8 (6.0.822.36306), X64 RyuJIT
 ```
-|                                   Method |   Categories | InputSize |      Mean |    Error |   StdDev |  Gen 0 | Allocated |
-|----------------------------------------- |------------- |---------- |----------:|---------:|---------:|-------:|----------:|
-| InterpolatedStringHandlerAppendFormatted | Interpolated |     Short |  47.21 ns | 0.348 ns | 0.291 ns | 0.0229 |      48 B |
-|                          FormatSubstring |       Format |     Short |  68.65 ns | 1.028 ns | 0.858 ns | 0.0343 |      72 B |
-|                              FormatRange |       Format |     Short |  72.50 ns | 0.654 ns | 0.611 ns | 0.0343 |      72 B |
-|              FormatInterpolatedSubstring | Interpolated |     Short |  76.10 ns | 0.660 ns | 0.618 ns | 0.0573 |     120 B |
-|                  FormatInterpolatedRange | Interpolated |     Short |  76.91 ns | 1.160 ns | 1.085 ns | 0.0573 |     120 B |
-|                   FormatInterpolatedSpan | Interpolated |     Short |  99.11 ns | 0.776 ns | 0.726 ns | 0.0459 |      96 B |
-| InterpolatedStringHandlerAppendFormatted | Interpolated |   Lengthy | 149.90 ns | 1.715 ns | 1.339 ns | 0.3097 |     648 B |
-|                          FormatSubstring |       Format |   Lengthy | 232.01 ns | 4.588 ns | 4.291 ns | 0.6082 |   1,272 B |
-|                              FormatRange |       Format |   Lengthy | 234.05 ns | 4.591 ns | 4.715 ns | 0.6080 |   1,272 B |
-|                  FormatInterpolatedRange | Interpolated |   Lengthy | 816.94 ns | 6.087 ns | 5.396 ns | 0.9174 |   1,920 B |
-|                   FormatInterpolatedSpan | Interpolated |   Lengthy | 834.33 ns | 6.244 ns | 5.841 ns | 0.6189 |   1,296 B |
-|              FormatInterpolatedSubstring | Interpolated |   Lengthy | 921.15 ns | 7.985 ns | 7.078 ns | 0.9174 |   1,920 B |
+|                                   Method |   Categories | InputSize |        Mean |     Error |    StdDev |  Gen 0 | Allocated |
+|----------------------------------------- |------------- |---------- |------------:|----------:|----------:|-------:|----------:|
+| InterpolatedStringHandlerAppendFormatted | Interpolated |     Short |    55.79 ns |  1.203 ns |  2.375 ns | 0.0114 |      48 B |
+|                              FormatRange |       Format |     Short |    87.50 ns |  1.761 ns |  1.647 ns | 0.0172 |      72 B |
+|                          FormatSubstring |       Format |     Short |    87.53 ns |  1.768 ns |  1.568 ns | 0.0172 |      72 B |
+|              FormatInterpolatedSubstring | Interpolated |     Short |    93.68 ns |  1.944 ns |  1.996 ns | 0.0286 |     120 B |
+|                  FormatInterpolatedRange | Interpolated |     Short |    94.55 ns |  1.966 ns |  2.341 ns | 0.0286 |     120 B |
+|                   FormatInterpolatedSpan | Interpolated |     Short |   116.19 ns |  2.211 ns |  1.960 ns | 0.0229 |      96 B |
+| InterpolatedStringHandlerAppendFormatted | Interpolated |   Lengthy |   232.18 ns |  4.758 ns |  7.546 ns | 0.1547 |     648 B |
+|                              FormatRange |       Format |   Lengthy |   346.93 ns |  6.829 ns |  9.793 ns | 0.3037 |   1,272 B |
+|                          FormatSubstring |       Format |   Lengthy |   349.39 ns |  6.996 ns | 11.879 ns | 0.3037 |   1,272 B |
+|                   FormatInterpolatedSpan | Interpolated |   Lengthy | 1,069.12 ns | 20.472 ns | 20.106 ns | 0.3090 |   1,296 B |
+|              FormatInterpolatedSubstring | Interpolated |   Lengthy | 1,074.19 ns | 21.150 ns | 28.950 ns | 0.4578 |   1,920 B |
+|                  FormatInterpolatedRange | Interpolated |   Lengthy | 1,085.95 ns | 20.413 ns | 19.094 ns | 0.4578 |   1,920 B |
