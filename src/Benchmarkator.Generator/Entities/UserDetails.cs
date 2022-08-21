@@ -1,6 +1,4 @@
-﻿using Bogus.DataSets;
-using System;
-using System.Net;
+﻿using System;
 
 namespace Benchmarkator.Generator.Entities;
 
