@@ -1,6 +1,6 @@
 ## Benchmarkator: benchmarks and stuff
 
-This project is playground for various benchmarks. Creating benchmark is much easier than reading IL and 
+This project is playground for various benchmarks. Creating benchmark is much easier than reading IL and
 _guessing_ performance characteristics. Be aware that IL is just one part of puzzle, keep in mind there's
 JITter as well and other factors, such as CPU caching, GC, ...
 
@@ -19,32 +19,50 @@ Not all benchmarks may be listed, check source directly.
   determining the fastest approach for implementing bitmap
 - [Division by `n`](src/Benchmarkator/Division/DivisibleByTwo.md):
   comparing modulo with logical AND when dividing by even number
+- [Using lambdas](src/Benchmarkator/Lambdinator/LambdaUsage.md):
+  comparing different ways how to write lambdas/anonymous functions
 - [String concatenation](src/Benchmarkator/Stringator/StringConcat.cs):
   simple concat of two strings
 - [Formatting string while rendering just part of it](src/Benchmarkator/Stringator/StringFormatSubstring.md):
   comparing approaches to format string in combination of `string.Substring`
-- [Using lambdas](src/Benchmarkator/Lambdinator/LambdaUsage.md):
-  comparing different ways how to write lambdas/anonymous functions
 - [Throw or return](src/Benchmarkator/Exceptions/ThrowOrReturn.md):
   demonstrating price of throwing an exception
+
+#### Collection benchmarks
+
+- [Add to collection](src/Benchmarkator.Collections/Add/AddToCollection.md):
+  comparing different ways to add entry to collection (List/Dictionary with default capacity and with capacity set to `n`)
+- [Add to `ConcurrentDictionary`](src/Benchmarkator.Collections/Add/RedundantConcurrentDictionary.md):
+  demonstrating price of adding to `ConcurrentDictionary` when concurrency is not needed (e.g. after refactoring)
+- [Collection Contains ...](src/Benchmarkator.Collections/Contains/ImmutableCollectionContains.md):
+  comparing `corefx` immutable collections with collections from `LanguageExt.Core`-
+- [Collection Create](src/Benchmarkator.Collections/Create/CreateCtor.md):
+  comparing `corefx` immutable collections instantiation/creation with `LanguageExt.Core` (`ctor`, `.Create`)
+- [Creating empty collection](src/Benchmarkator.Collections/Create/EmptyCollection.md):
+  comparison of creating empty `List` and `Dictionary`
+- [Array access](src/Benchmarkator.Collections/Iteration/ArrayIteration.md):
+  determining the fastest way to access array item (and way of iteration)
+- [Array/Array as `IEnumerable`/`List` `foreach`](src/Benchmarkator.Collections/Iteration/ArrayListForeachIteration.md):
+  difference between iterating over array and `List` using `foreach`
+- [Accessing array/`List<>` value using indexer](src/Benchmarkator.Collections/Iteration/CollectionIterationIndexerAccess.md):
+  comparison of accessing value via `[]` on array and `List<>`
+- [Deconstructing `KeyValuePair<,>`](src/Benchmarkator.Collections/Iteration/DictionaryDeconstructKvp.md):
+  finding difference of using key value pair deconstruction
+- [Differences enumerating `IEnumerable`](src/Benchmarkator.Collections/Iteration/EnumerableIteration.md):
+  demonstrating difference of `IEnumerable` implementation
+- [Enumerating `ImmutableArray` various way](src/Benchmarkator.Collections/Iteration/ImmutableArrayIteration.md):
+  finding difference of various enumeration approaches on `ImmutableArray`
+- [Collection Lookup](src/Benchmarkator.Collections/Lookup/ValueLookup.md):
+  benchmark of lookup of structured value (e.g. `Id`), comparing array, `List<T>` and `Dictionary<TKey, TValue>`
+- [Creating array or `List<>` from collection](src/Benchmarkator.Collections/ToCollection/ToCollection.md):
+  benchmark comparing performance of `.ToArray()` and `.ToList()`
+- [Creating `Dictionary<,>` from collection](src/Benchmarkator.Collections/ToCollection/ToDictionary.md):
+  benchmark of creating dictionary out of collection using LINQ and simple implementation
 
 #### JSON
 
 - [JSON Deserialization](src/Benchmarkator.Json/Deserialization/JsonPayloadDeserialization.md):
   observing memory allocation by `StreamReader` buffer
-
-#### Collection benchmarks
-
-- [Array access](src/Benchmarkator.Collections/Iteration/ArrayIteration.md):
-  determining the fastest way to access array item (and way of iteration)
-- [Collection Contains ...](src/Benchmarkator.Collections/Contains/ImmutableCollectionContains.md):
-  comparing `corefx` immutable collections with collections from `LanguageExt.Core`
-- [Collection Create](src/Benchmarkator.Collections/Create/CreateCtor.md):
-  comparing `corefx` immutable collections instantiation/creation with `LanguageExt.Core` (`ctor`, `.Create`)
-- [Collection Lookup](src/Benchmarkator.Collections/Lookup/ValueLookup.md):
-  benchmark of lookup of structured value (e.g. `Id`), comparing array, `List<T>` and `Dictionary<TKey, TValue>`
-- [`.ToArray` vs `.ToList`](src/Benchmarkator.Collections/ToCollection/ToCollection.md):
-  bemchmark comparing performance of `.ToArray()` and `.ToList()`
 
 #### MongoDB
 
@@ -59,10 +77,10 @@ Not all benchmarks may be listed, check source directly.
 dotnet run -c Release --project src/Benchmarkator -f net6.0
 ```
 
-... so running benchmarks related to `System.Collections` is done using command:
+... so running benchmarks related to collections is done using command:
 
 ```
-dotnet run -c Release --project src/Benchmarkator -f net6.0 --filter System.Collections*
+dotnet run -c Release --project src/Benchmarkator -f net6.0 --filter Benchmarkator.Collections*
 ```
 
 More about running benchmarks: [BenchmarkDotNet | How to use console arguments](https://benchmarkdotnet.org/articles/guides/console-args.html).

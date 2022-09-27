@@ -8,7 +8,7 @@ namespace Benchmarkator.Collections.Iteration;
 [Orderer(SummaryOrderPolicy.FastestToSlowest)]
 public class ImmutableArrayIteration
 {
-    [Params(1, 2, 4, 8)]
+    [Params(1, 4, 16, 128)]
     public int Length;
 
     private ImmutableArray<int> _data = default;

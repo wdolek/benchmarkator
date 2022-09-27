@@ -11,21 +11,18 @@ Let's see how using lambda differs:
 ... after looking into IL it should be obvious that there's no huge difference - but what does benchmark say?
 
 ``` ini
-
-BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19044.1826 (21H2)
-Intel Core i7-7600U CPU 2.80GHz (Kaby Lake), 1 CPU, 4 logical and 2 physical cores
-.NET SDK=6.0.302
-  [Host]     : .NET 6.0.7 (6.0.722.32202), X64 RyuJIT
-  DefaultJob : .NET 6.0.7 (6.0.722.32202), X64 RyuJIT
-
-
+BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19044.1889 (21H2)
+Intel Core i7-7820HQ CPU 2.90GHz (Kaby Lake), 1 CPU, 8 logical and 4 physical cores
+.NET SDK=6.0.303
+  [Host]     : .NET 6.0.8 (6.0.822.36306), X64 RyuJIT
+  DefaultJob : .NET 6.0.8 (6.0.822.36306), X64 RyuJIT
 ```
 |               Method | Categories |      Mean |     Error |    StdDev | Ratio | RatioSD |  Gen 0 | Allocated |
 |--------------------- |----------- |----------:|----------:|----------:|------:|--------:|-------:|----------:|
-|   InlineStaticLambda |     Inline | 0.8223 ns | 0.0095 ns | 0.0079 ns |  0.73 |    0.01 |      - |         - |
-|         InlineLambda |     Inline | 1.1329 ns | 0.0209 ns | 0.0175 ns |  1.00 |    0.00 |      - |         - |
+|   InlineStaticLambda |     Inline |  1.385 ns | 0.0611 ns | 0.0572 ns |  1.00 |    0.06 |      - |         - |
+|         InlineLambda |     Inline |  1.390 ns | 0.0565 ns | 0.0472 ns |  1.00 |    0.00 |      - |         - |
 |                      |            |           |           |           |       |         |        |           |
-|   StaticMemberLambda |     Member | 0.8094 ns | 0.0089 ns | 0.0074 ns |  0.12 |    0.00 |      - |         - |
-| InstanceMemberLambda |     Member | 6.8336 ns | 0.1678 ns | 0.1723 ns |  1.00 |    0.00 | 0.0306 |      64 B |
-|  InstanceMethodGroup |     Member | 6.9161 ns | 0.1052 ns | 0.0984 ns |  1.02 |    0.02 | 0.0306 |      64 B |
-|    StaticMethodGroup |     Member | 7.1837 ns | 0.1002 ns | 0.0937 ns |  1.06 |    0.03 | 0.0306 |      64 B |
+|   StaticMemberLambda |     Member |  1.352 ns | 0.0638 ns | 0.0655 ns |  0.10 |    0.01 |      - |         - |
+|  InstanceMethodGroup |     Member | 12.749 ns | 0.2832 ns | 0.3478 ns |  0.96 |    0.03 | 0.0153 |      64 B |
+| InstanceMemberLambda |     Member | 13.250 ns | 0.2896 ns | 0.3219 ns |  1.00 |    0.00 | 0.0153 |      64 B |
+|    StaticMethodGroup |     Member | 13.703 ns | 0.3114 ns | 0.5849 ns |  1.03 |    0.06 | 0.0153 |      64 B |

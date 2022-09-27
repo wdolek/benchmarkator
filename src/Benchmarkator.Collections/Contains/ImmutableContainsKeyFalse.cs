@@ -4,7 +4,7 @@ using System.Linq;
 using Benchmarkator.Generator;
 using BenchmarkDotNet.Attributes;
 
-namespace System.Collections;
+namespace Benchmarkator.Collections.Contains;
 
 [GenericTypeArguments(typeof(int), typeof(int))]
 [GenericTypeArguments(typeof(string), typeof(string))]
@@ -37,8 +37,8 @@ public class ImmutableContainsKeyFalse<TKey, TValue>
             .ToDictionary(item => item, item => (TValue)(object)item);
 
         // corefx
-        _immutableDictionary = Immutable.ImmutableDictionary.CreateRange<TKey, TValue>(_source);
-        _immutableSortedDictionary = Immutable.ImmutableSortedDictionary.CreateRange<TKey, TValue>(_source);
+        _immutableDictionary = System.Collections.Immutable.ImmutableDictionary.CreateRange<TKey, TValue>(_source);
+        _immutableSortedDictionary = System.Collections.Immutable.ImmutableSortedDictionary.CreateRange<TKey, TValue>(_source);
 
         // LanguageExt.Core
         _langExtHashMap = new LanguageExt.HashMap<TKey, TValue>().AddRange(_source);

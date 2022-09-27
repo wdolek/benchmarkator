@@ -3,135 +3,135 @@
 ### Constructor<int>, default size
 
 ``` ini
-BenchmarkDotNet=v0.12.0, OS=Windows 10.0.18362
+BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19044.1889 (21H2)
 Intel Core i7-7820HQ CPU 2.90GHz (Kaby Lake), 1 CPU, 8 logical and 4 physical cores
-.NET Core SDK=3.0.100
-  [Host]     : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT
-  DefaultJob : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT
+.NET SDK=6.0.303
+  [Host]     : .NET 6.0.8 (6.0.822.36306), X64 RyuJIT
+  DefaultJob : .NET 6.0.8 (6.0.822.36306), X64 RyuJIT
 ```
 |                    Method |      Mean |     Error |    StdDev |    Median |
 |-------------------------- |----------:|----------:|----------:|----------:|
-|            ImmutableArray | 0.8450 ns | 0.0060 ns | 0.0053 ns | 0.8438 ns |
-|       ImmutableDictionary | 0.0392 ns | 0.0075 ns | 0.0070 ns | 0.0375 ns |
-|          ImmutableHashSet | 0.0000 ns | 0.0000 ns | 0.0000 ns | 0.0000 ns |
-|             ImmutableList | 0.0000 ns | 0.0000 ns | 0.0000 ns | 0.0000 ns |
-|            ImmutableQueue | 0.0000 ns | 0.0000 ns | 0.0000 ns | 0.0000 ns |
-|            ImmutableStack | 0.0000 ns | 0.0000 ns | 0.0000 ns | 0.0000 ns |
-| ImmutableSortedDictionary | 0.0000 ns | 0.0000 ns | 0.0000 ns | 0.0000 ns |
-|        ImmutableSortedSet | 0.0000 ns | 0.0000 ns | 0.0000 ns | 0.0000 ns |
-|            LanguageExtArr | 0.0644 ns | 0.0322 ns | 0.0441 ns | 0.0783 ns |
-|        LanguageExtHashMap | 0.0585 ns | 0.0224 ns | 0.0336 ns | 0.0637 ns |
-|        LanguageExtHashSet | 0.0508 ns | 0.0041 ns | 0.0034 ns | 0.0506 ns |
-|            LanguageExtLst | 0.0000 ns | 0.0000 ns | 0.0000 ns | 0.0000 ns |
-|            LanguageExtQue | 0.0302 ns | 0.0089 ns | 0.0083 ns | 0.0280 ns |
-|           LanguageExtStck | 0.0243 ns | 0.0120 ns | 0.0106 ns | 0.0234 ns |
-|            LanguageExtMap | 0.0550 ns | 0.0066 ns | 0.0055 ns | 0.0541 ns |
-|            LanguageExtSet | 0.0000 ns | 0.0000 ns | 0.0000 ns | 0.0000 ns |
+|            ImmutableArray | 0.9450 ns | 0.0546 ns | 0.0561 ns | 0.9293 ns |
+|       ImmutableDictionary | 0.0182 ns | 0.0373 ns | 0.0349 ns | 0.0000 ns |
+|          ImmutableHashSet | 0.0550 ns | 0.0576 ns | 0.0617 ns | 0.0184 ns |
+|             ImmutableList | 0.0404 ns | 0.0545 ns | 0.0483 ns | 0.0228 ns |
+|            ImmutableQueue | 0.0159 ns | 0.0376 ns | 0.0386 ns | 0.0000 ns |
+|            ImmutableStack | 0.0278 ns | 0.0442 ns | 0.0575 ns | 0.0000 ns |
+| ImmutableSortedDictionary | 0.0082 ns | 0.0204 ns | 0.0181 ns | 0.0000 ns |
+|        ImmutableSortedSet | 0.0123 ns | 0.0297 ns | 0.0305 ns | 0.0000 ns |
+|            LanguageExtArr | 0.0043 ns | 0.0062 ns | 0.0173 ns | 0.0000 ns |
+|        LanguageExtHashMap | 0.0021 ns | 0.0072 ns | 0.0064 ns | 0.0000 ns |
+|        LanguageExtHashSet | 0.0159 ns | 0.0186 ns | 0.0174 ns | 0.0173 ns |
+|            LanguageExtLst | 0.0395 ns | 0.0265 ns | 0.0248 ns | 0.0515 ns |
+|            LanguageExtQue | 0.0000 ns | 0.0000 ns | 0.0000 ns | 0.0000 ns |
+|           LanguageExtStck | 0.0000 ns | 0.0000 ns | 0.0000 ns | 0.0000 ns |
+|            LanguageExtMap | 0.0000 ns | 0.0000 ns | 0.0000 ns | 0.0000 ns |
+|            LanguageExtSet | 0.0988 ns | 0.0318 ns | 0.0312 ns | 0.0918 ns |
 
 ### Constructor<string>, default size
 
 ``` ini
-BenchmarkDotNet=v0.12.0, OS=Windows 10.0.18362
+BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19044.1889 (21H2)
 Intel Core i7-7820HQ CPU 2.90GHz (Kaby Lake), 1 CPU, 8 logical and 4 physical cores
-.NET Core SDK=3.0.100
-  [Host]     : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT
-  DefaultJob : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT
+.NET SDK=6.0.303
+  [Host]     : .NET 6.0.8 (6.0.822.36306), X64 RyuJIT
+  DefaultJob : .NET 6.0.8 (6.0.822.36306), X64 RyuJIT
 ```
 |                    Method |      Mean |     Error |    StdDev |    Median |
 |-------------------------- |----------:|----------:|----------:|----------:|
-|            ImmutableArray | 5.4117 ns | 0.0443 ns | 0.0415 ns | 5.3913 ns |
-|       ImmutableDictionary | 3.3232 ns | 0.0060 ns | 0.0054 ns | 3.3234 ns |
-|          ImmutableHashSet | 3.2276 ns | 0.0079 ns | 0.0074 ns | 3.2283 ns |
-|             ImmutableList | 3.2411 ns | 0.0157 ns | 0.0131 ns | 3.2387 ns |
-|            ImmutableQueue | 3.7812 ns | 0.0178 ns | 0.0158 ns | 3.7760 ns |
-|            ImmutableStack | 3.6740 ns | 0.0166 ns | 0.0147 ns | 3.6777 ns |
-| ImmutableSortedDictionary | 3.3095 ns | 0.0554 ns | 0.0491 ns | 3.2853 ns |
-|        ImmutableSortedSet | 3.4315 ns | 0.0072 ns | 0.0068 ns | 3.4324 ns |
-|            LanguageExtArr | 0.0184 ns | 0.0112 ns | 0.0093 ns | 0.0149 ns |
-|        LanguageExtHashMap | 0.0000 ns | 0.0000 ns | 0.0000 ns | 0.0000 ns |
-|        LanguageExtHashSet | 0.0594 ns | 0.0031 ns | 0.0027 ns | 0.0604 ns |
-|            LanguageExtLst | 0.0595 ns | 0.0101 ns | 0.0084 ns | 0.0557 ns |
-|            LanguageExtQue | 0.0127 ns | 0.0073 ns | 0.0068 ns | 0.0119 ns |
-|           LanguageExtStck | 0.0139 ns | 0.0113 ns | 0.0106 ns | 0.0098 ns |
-|            LanguageExtMap | 0.0000 ns | 0.0000 ns | 0.0000 ns | 0.0000 ns |
-|            LanguageExtSet | 0.0000 ns | 0.0000 ns | 0.0000 ns | 0.0000 ns |
+|            ImmutableArray | 6.3089 ns | 0.1510 ns | 0.1412 ns | 6.3395 ns |
+|       ImmutableDictionary | 5.0311 ns | 0.1841 ns | 0.4585 ns | 5.0839 ns |
+|          ImmutableHashSet | 4.7828 ns | 0.1861 ns | 0.2354 ns | 4.7783 ns |
+|             ImmutableList | 4.5509 ns | 0.1669 ns | 0.1479 ns | 4.5025 ns |
+|            ImmutableQueue | 4.8036 ns | 0.1844 ns | 0.2398 ns | 4.8338 ns |
+|            ImmutableStack | 4.7860 ns | 0.1809 ns | 0.2083 ns | 4.7439 ns |
+| ImmutableSortedDictionary | 4.6892 ns | 0.1862 ns | 0.2217 ns | 4.6814 ns |
+|        ImmutableSortedSet | 4.7927 ns | 0.1877 ns | 0.2809 ns | 4.7323 ns |
+|            LanguageExtArr | 0.0356 ns | 0.0345 ns | 0.0383 ns | 0.0186 ns |
+|        LanguageExtHashMap | 0.0073 ns | 0.0102 ns | 0.0095 ns | 0.0000 ns |
+|        LanguageExtHashSet | 0.0309 ns | 0.0304 ns | 0.0395 ns | 0.0082 ns |
+|            LanguageExtLst | 0.0010 ns | 0.0043 ns | 0.0036 ns | 0.0000 ns |
+|            LanguageExtQue | 0.0151 ns | 0.0232 ns | 0.0239 ns | 0.0049 ns |
+|           LanguageExtStck | 0.0178 ns | 0.0195 ns | 0.0173 ns | 0.0142 ns |
+|            LanguageExtMap | 0.0031 ns | 0.0080 ns | 0.0071 ns | 0.0000 ns |
+|            LanguageExtSet | 0.0142 ns | 0.0222 ns | 0.0228 ns | 0.0000 ns |
 
 ### Constructor<int>, from existing collection
 
 ``` ini
-BenchmarkDotNet=v0.12.0, OS=Windows 10.0.18362
+BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19044.1889 (21H2)
 Intel Core i7-7820HQ CPU 2.90GHz (Kaby Lake), 1 CPU, 8 logical and 4 physical cores
-.NET Core SDK=3.0.100
-  [Host]     : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT
-  DefaultJob : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT
+.NET SDK=6.0.303
+  [Host]     : .NET 6.0.8 (6.0.822.36306), X64 RyuJIT
+  DefaultJob : .NET 6.0.8 (6.0.822.36306), X64 RyuJIT
 ```
-|                    Method | Size |           Mean |        Error |       StdDev |
-|-------------------------- |----- |---------------:|-------------:|-------------:|
-|            **ImmutableArray** |  **256** |       **108.6 ns** |      **2.87 ns** |      **2.68 ns** |
-|       ImmutableDictionary |  256 |    78,344.8 ns |    239.53 ns |    212.34 ns |
-|             ImmutableList |  256 |     4,127.3 ns |     16.81 ns |     15.72 ns |
-|            ImmutableQueue |  256 |     1,161.7 ns |      7.19 ns |      5.61 ns |
-|            ImmutableStack |  256 |     2,074.0 ns |      9.58 ns |      8.96 ns |
-| ImmutableSortedDictionary |  256 |    39,471.4 ns |    109.79 ns |     91.68 ns |
-|        ImmutableSortedSet |  256 |     6,894.7 ns |     41.22 ns |     38.55 ns |
-|            LanguageExtArr |  256 |       104.9 ns |      0.72 ns |      0.64 ns |
-|        LanguageExtHashMap |  256 |    49,289.7 ns |    973.71 ns |  1,705.38 ns |
-|            LanguageExtLst |  256 |    25,746.3 ns |    172.44 ns |    161.30 ns |
-|            LanguageExtQue |  256 |     4,789.6 ns |     17.17 ns |     14.34 ns |
-|           LanguageExtStck |  256 |     2,526.3 ns |      7.57 ns |      6.71 ns |
-|            LanguageExtMap |  256 |    85,775.0 ns |  1,617.40 ns |  1,588.50 ns |
-|            LanguageExtSet |  256 |    84,940.0 ns |  1,682.48 ns |  1,937.55 ns |
-|            **ImmutableArray** | **4096** |       **858.9 ns** |     **10.56 ns** |      **9.88 ns** |
-|       ImmutableDictionary | 4096 | 2,033,821.7 ns |  6,394.63 ns |  5,668.67 ns |
-|             ImmutableList | 4096 |    89,017.4 ns |    918.43 ns |    814.17 ns |
-|            ImmutableQueue | 4096 |    25,291.3 ns |    245.10 ns |    229.27 ns |
-|            ImmutableStack | 4096 |    39,126.7 ns |    131.69 ns |    123.18 ns |
-| ImmutableSortedDictionary | 4096 |   991,173.8 ns |  2,370.03 ns |  2,100.97 ns |
-|        ImmutableSortedSet | 4096 |   281,402.7 ns |    407.69 ns |    340.44 ns |
-|            LanguageExtArr | 4096 |       917.2 ns |      9.14 ns |      8.55 ns |
-|        LanguageExtHashMap | 4096 |   913,340.0 ns | 17,773.90 ns | 20,468.45 ns |
-|            LanguageExtLst | 4096 |   582,389.4 ns |    862.67 ns |    764.73 ns |
-|            LanguageExtQue | 4096 |   119,612.3 ns |  1,122.46 ns |    995.03 ns |
-|           LanguageExtStck | 4096 |    48,446.7 ns |    229.47 ns |    203.42 ns |
-|            LanguageExtMap | 4096 | 1,947,113.0 ns | 42,305.82 ns | 89,237.33 ns |
-|            LanguageExtSet | 4096 | 1,957,117.4 ns | 47,758.46 ns | 92,014.35 ns |
+|                    Method | Size |           Mean |         Error |        StdDev |
+|-------------------------- |----- |---------------:|--------------:|--------------:|
+|            **ImmutableArray** |  **256** |       **198.8 ns** |       **4.02 ns** |      **10.02 ns** |
+|       ImmutableDictionary |  256 |    81,401.4 ns |   1,587.92 ns |   1,559.55 ns |
+|             ImmutableList |  256 |     7,420.4 ns |     147.79 ns |     234.41 ns |
+|            ImmutableQueue |  256 |     2,365.3 ns |      46.52 ns |      73.79 ns |
+|            ImmutableStack |  256 |     3,627.4 ns |      71.45 ns |     123.25 ns |
+| ImmutableSortedDictionary |  256 |    56,113.0 ns |   1,094.27 ns |   1,603.96 ns |
+|        ImmutableSortedSet |  256 |    10,946.6 ns |     204.25 ns |     352.32 ns |
+|            LanguageExtArr |  256 |       193.1 ns |       3.81 ns |       7.06 ns |
+|        LanguageExtHashMap |  256 |    88,840.6 ns |   8,360.91 ns |  24,123.14 ns |
+|            LanguageExtLst |  256 |    36,738.2 ns |     687.95 ns |     609.85 ns |
+|            LanguageExtQue |  256 |     7,990.5 ns |     159.23 ns |     243.16 ns |
+|           LanguageExtStck |  256 |     4,694.0 ns |      70.72 ns |      62.69 ns |
+|            LanguageExtMap |  256 |   109,848.5 ns |   7,615.94 ns |  22,095.22 ns |
+|            LanguageExtSet |  256 |   112,386.3 ns |   7,222.35 ns |  20,722.26 ns |
+|            **ImmutableArray** | **4096** |     **2,127.9 ns** |      **49.48 ns** |     **143.54 ns** |
+|       ImmutableDictionary | 4096 | 2,584,373.3 ns |  51,525.75 ns |  87,494.63 ns |
+|             ImmutableList | 4096 |   149,026.0 ns |   2,896.89 ns |   4,335.92 ns |
+|            ImmutableQueue | 4096 |    50,054.0 ns |     979.32 ns |   1,790.75 ns |
+|            ImmutableStack | 4096 |    68,584.0 ns |   1,178.73 ns |   1,490.72 ns |
+| ImmutableSortedDictionary | 4096 | 1,578,749.6 ns |  30,589.94 ns |  45,785.58 ns |
+|        ImmutableSortedSet | 4096 |   392,681.0 ns |   6,026.96 ns |   5,342.74 ns |
+|            LanguageExtArr | 4096 |     2,170.7 ns |      43.41 ns |     107.29 ns |
+|        LanguageExtHashMap | 4096 | 1,379,390.0 ns | 152,199.46 ns | 448,763.55 ns |
+|            LanguageExtLst | 4096 |   795,041.6 ns |  12,839.48 ns |  13,738.10 ns |
+|            LanguageExtQue | 4096 |   186,187.1 ns |   3,680.54 ns |   6,542.16 ns |
+|           LanguageExtStck | 4096 |    83,166.8 ns |   1,639.41 ns |   2,552.36 ns |
+|            LanguageExtMap | 4096 | 1,995,646.9 ns | 298,683.93 ns | 871,275.03 ns |
+|            LanguageExtSet | 4096 | 2,110,593.5 ns | 220,661.07 ns | 625,978.74 ns |
 
 ### Constructor<string>, from existing collection
 
 ``` ini
-BenchmarkDotNet=v0.12.0, OS=Windows 10.0.18362
+BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19044.1889 (21H2)
 Intel Core i7-7820HQ CPU 2.90GHz (Kaby Lake), 1 CPU, 8 logical and 4 physical cores
-.NET Core SDK=3.0.100
-  [Host]     : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT
-  DefaultJob : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT
+.NET SDK=6.0.303
+  [Host]     : .NET 6.0.8 (6.0.822.36306), X64 RyuJIT
+  DefaultJob : .NET 6.0.8 (6.0.822.36306), X64 RyuJIT
 ```
-|                    Method | Size |           Mean |         Error |        StdDev |
-|-------------------------- |----- |---------------:|--------------:|--------------:|
-|            **ImmutableArray** |  **256** |       **188.7 ns** |       **1.78 ns** |       **1.67 ns** |
-|       ImmutableDictionary |  256 |   106,931.7 ns |     175.12 ns |     163.80 ns |
-|             ImmutableList |  256 |     6,299.2 ns |      10.89 ns |       9.65 ns |
-|            ImmutableQueue |  256 |     1,961.8 ns |      13.27 ns |      11.76 ns |
-|            ImmutableStack |  256 |     2,916.2 ns |      21.32 ns |      18.90 ns |
-| ImmutableSortedDictionary |  256 |   254,129.5 ns |     484.54 ns |     429.54 ns |
-|        ImmutableSortedSet |  256 |   285,773.0 ns |     508.00 ns |     424.20 ns |
-|            LanguageExtArr |  256 |       188.2 ns |       1.22 ns |       1.14 ns |
-|        LanguageExtHashMap |  256 |    99,891.7 ns |   1,895.45 ns |   1,479.84 ns |
-|            LanguageExtLst |  256 |    28,277.9 ns |      65.86 ns |      58.39 ns |
-|            LanguageExtQue |  256 |     6,001.2 ns |      15.30 ns |      12.78 ns |
-|           LanguageExtStck |  256 |     4,219.1 ns |      23.14 ns |      21.65 ns |
-|            LanguageExtMap |  256 |   366,173.3 ns |   7,222.89 ns |  10,810.88 ns |
-|            LanguageExtSet |  256 |   363,004.2 ns |  23,275.73 ns |  30,265.02 ns |
-|            **ImmutableArray** | **4096** |     **2,163.9 ns** |      **38.36 ns** |      **35.88 ns** |
-|       ImmutableDictionary | 4096 | 2,594,166.9 ns |   3,956.39 ns |   3,507.24 ns |
-|             ImmutableList | 4096 |   115,346.6 ns |     964.18 ns |     854.72 ns |
-|            ImmutableQueue | 4096 |    37,246.4 ns |     175.20 ns |     146.30 ns |
-|            ImmutableStack | 4096 |    52,030.9 ns |     261.64 ns |     244.74 ns |
-| ImmutableSortedDictionary | 4096 | 7,322,629.6 ns |  54,850.15 ns |  51,306.87 ns |
-|        ImmutableSortedSet | 4096 | 7,139,658.8 ns |  18,510.41 ns |  15,457.03 ns |
-|            LanguageExtArr | 4096 |     2,547.1 ns |      47.15 ns |      44.11 ns |
-|        LanguageExtHashMap | 4096 | 1,927,943.6 ns |  87,309.28 ns | 249,098.28 ns |
-|            LanguageExtLst | 4096 |   615,816.4 ns |   3,843.74 ns |   3,407.37 ns |
-|            LanguageExtQue | 4096 |   146,367.1 ns |     552.29 ns |     516.61 ns |
-|           LanguageExtStck | 4096 |    83,277.6 ns |     442.12 ns |     413.56 ns |
-|            LanguageExtMap | 4096 | 8,155,348.0 ns | 288,008.09 ns | 849,198.36 ns |
-|            LanguageExtSet | 4096 | 8,208,332.3 ns | 298,807.84 ns | 876,351.68 ns |
+|                    Method | Size |           Mean |        Error |        StdDev |
+|-------------------------- |----- |---------------:|-------------:|--------------:|
+|            **ImmutableArray** |  **256** |       **378.2 ns** |      **7.53 ns** |      **13.96 ns** |
+|       ImmutableDictionary |  256 |    98,115.5 ns |  1,927.59 ns |   2,885.13 ns |
+|             ImmutableList |  256 |     9,896.6 ns |    191.96 ns |     249.60 ns |
+|            ImmutableQueue |  256 |     3,533.4 ns |     68.37 ns |      91.27 ns |
+|            ImmutableStack |  256 |     4,989.8 ns |     96.48 ns |     147.34 ns |
+| ImmutableSortedDictionary |  256 |   226,338.2 ns |  4,481.29 ns |   8,080.69 ns |
+|        ImmutableSortedSet |  256 |   177,442.8 ns |  2,971.44 ns |   2,779.49 ns |
+|            LanguageExtArr |  256 |       191.8 ns |      3.50 ns |       3.10 ns |
+|        LanguageExtHashMap |  256 |    66,645.6 ns |  1,271.11 ns |   1,248.40 ns |
+|            LanguageExtLst |  256 |    32,168.1 ns |    510.31 ns |     426.14 ns |
+|            LanguageExtQue |  256 |     5,894.5 ns |    101.95 ns |     109.08 ns |
+|           LanguageExtStck |  256 |     4,120.4 ns |     82.26 ns |     130.47 ns |
+|            LanguageExtMap |  256 |   158,800.9 ns |  2,755.24 ns |   2,442.45 ns |
+|            LanguageExtSet |  256 |   172,628.1 ns |  3,323.43 ns |   4,081.47 ns |
+|            **ImmutableArray** | **4096** |     **2,353.1 ns** |     **46.74 ns** |      **62.40 ns** |
+|       ImmutableDictionary | 4096 | 1,962,078.9 ns | 37,230.62 ns |  34,825.54 ns |
+|             ImmutableList | 4096 |   129,395.6 ns |  2,579.18 ns |   3,167.46 ns |
+|            ImmutableQueue | 4096 |    45,559.1 ns |    888.11 ns |   1,273.70 ns |
+|            ImmutableStack | 4096 |    61,718.1 ns |  1,063.71 ns |   1,306.33 ns |
+| ImmutableSortedDictionary | 4096 | 4,337,863.7 ns | 83,043.45 ns |  92,302.58 ns |
+|        ImmutableSortedSet | 4096 | 4,514,653.4 ns | 88,583.48 ns | 124,181.67 ns |
+|            LanguageExtArr | 4096 |     2,558.0 ns |     50.74 ns |      65.98 ns |
+|        LanguageExtHashMap | 4096 | 1,525,048.2 ns | 28,529.17 ns |  28,019.46 ns |
+|            LanguageExtLst | 4096 |   703,255.9 ns | 13,651.49 ns |  17,264.77 ns |
+|            LanguageExtQue | 4096 |   121,836.5 ns |  2,409.88 ns |   2,578.54 ns |
+|           LanguageExtStck | 4096 |    66,604.9 ns |  1,248.79 ns |   1,107.02 ns |
+|            LanguageExtMap | 4096 | 4,509,360.0 ns | 88,740.07 ns | 130,074.04 ns |
+|            LanguageExtSet | 4096 | 4,596,392.5 ns | 87,471.73 ns | 100,732.57 ns |

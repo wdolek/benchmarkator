@@ -51,7 +51,8 @@ public sealed class ValuesGenerator
         {
             return (T)(object)_rand.Int();
         }
-        else if (typeof(T) == typeof(string))
+
+        if (typeof(T) == typeof(string))
         {
             return (T)(object)_rand.String2(1, 50, StringChars);
         }
