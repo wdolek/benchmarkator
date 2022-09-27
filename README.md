@@ -19,6 +19,8 @@ Not all benchmarks may be listed, check source directly.
   determining the fastest approach for implementing bitmap
 - [Division by `n`](src/Benchmarkator/Division/DivisibleByTwo.md):
   comparing modulo with logical AND when dividing by even number
+- [String concatenation](src/Benchmarkator/Stringator/StringConcat.cs):
+  simple concat of two strings
 - [Formatting string while rendering just part of it](src/Benchmarkator/Stringator/StringFormatSubstring.md):
   comparing approaches to format string in combination of `string.Substring`
 - [Using lambdas](src/Benchmarkator/Lambdinator/LambdaUsage.md):
