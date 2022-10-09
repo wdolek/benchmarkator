@@ -34,6 +34,8 @@ Not all benchmarks may be listed, check source directly.
   comparing different ways to add entry to collection (List/Dictionary with default capacity and with capacity set to `n`)
 - [Add to `ConcurrentDictionary`](src/Benchmarkator.Collections/Add/RedundantConcurrentDictionary.md):
   demonstrating price of adding to `ConcurrentDictionary` when concurrency is not needed (e.g. after refactoring)
+- [Add to `ConcurrentBag`](src/Benchmarkator.Collections/Add/AddToConcurrentBag.md):
+  demonstrating price of creating `ConcurrentBad<>` with known initial data
 - [Collection Contains ...](src/Benchmarkator.Collections/Contains/ImmutableCollectionContains.md):
   comparing `corefx` immutable collections with collections from `LanguageExt.Core`-
 - [Collection Create](src/Benchmarkator.Collections/Create/CreateCtor.md):
