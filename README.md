@@ -32,8 +32,8 @@ Not all benchmarks may be listed, check source directly.
 
 - [Add to collection](src/Benchmarkator.Collections/Add/AddToCollection.md):
   comparing different ways to add entry to collection (List/Dictionary with default capacity and with capacity set to `n`)
-- [Add to `ConcurrentDictionary`](src/Benchmarkator.Collections/Add/RedundantConcurrentDictionary.md):
-  demonstrating price of adding to `ConcurrentDictionary` when concurrency is not needed (e.g. after refactoring)
+- [Add to `ConcurrentBag` and `ConcurrentDictionary`](src/Benchmarkator.Collections/Add/RedundantConcurrentCollection.md):
+  demonstrating price of adding to concurrent collection when concurrency is not needed (e.g. after refactoring)
 - [Add to `ConcurrentBag`](src/Benchmarkator.Collections/Add/AddToConcurrentBag.md):
   demonstrating price of creating `ConcurrentBad<>` with known initial data
 - [Collection Contains ...](src/Benchmarkator.Collections/Contains/ImmutableCollectionContains.md):
