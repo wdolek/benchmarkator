@@ -29,6 +29,20 @@ public class DictionaryDeconstructKvp
     }
 
     [Benchmark]
+    public int SimpleIterationWithIndex()
+    {
+        var local = _data;
+        var result = 0;
+
+        foreach (var key in local.Keys)
+        {
+            result = key + local[key];
+        }
+
+        return result;
+    }
+
+    [Benchmark]
     public int DeconstructIteration()
     {
         var local = _data;
