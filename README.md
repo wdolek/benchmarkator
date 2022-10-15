@@ -35,7 +35,7 @@ Not all benchmarks may be listed, check source directly.
 - [Add to `ConcurrentBag` and `ConcurrentDictionary`](src/Benchmarkator.Collections/Add/RedundantConcurrentCollection.md):
   demonstrating price of adding to concurrent collection when concurrency is not needed (e.g. after refactoring)
 - [Add to `ConcurrentBag`](src/Benchmarkator.Collections/Add/AddToConcurrentBag.md):
-  demonstrating price of creating `ConcurrentBad<>` with known initial data
+  demonstrating price of creating `ConcurrentBag<>` with known initial data
 - [Collection Contains ...](src/Benchmarkator.Collections/Contains/ImmutableCollectionContains.md):
   comparing `corefx` immutable collections with collections from `LanguageExt.Core`-
 - [Collection Create](src/Benchmarkator.Collections/Create/CreateCtor.md):
@@ -50,6 +50,8 @@ Not all benchmarks may be listed, check source directly.
   comparison of accessing value via `[]` on array and `List<>`
 - [Deconstructing `KeyValuePair<,>`](src/Benchmarkator.Collections/Iteration/DictionaryDeconstructKvp.md):
   finding difference of using key value pair deconstruction
+- [Deconstructing `KeyValuePair<,>` vs accessing value using key](src/Benchmarkator.Collections/Iteration/DictionaryDeconstructOrAccess.md):
+  determining price of accessing value using key instead of simple iteration
 - [Differences enumerating `IEnumerable`](src/Benchmarkator.Collections/Iteration/EnumerableIteration.md):
   demonstrating difference of `IEnumerable` implementation
 - [Enumerating `ImmutableArray` various way](src/Benchmarkator.Collections/Iteration/ImmutableArrayIteration.md):

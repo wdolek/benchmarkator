@@ -4,7 +4,7 @@ using BenchmarkDotNet.Attributes;
 
 namespace Benchmarkator.Collections.Iteration;
 
-public class DictionaryDeconstructKvp
+public class DictionaryDeconstructOrAccess
 {
     private Dictionary<int, int> _data = null!;
 
@@ -15,21 +15,21 @@ public class DictionaryDeconstructKvp
     }
 
     [Benchmark(Baseline = true)]
-    public int SimpleIteration()
+    public int Index()
     {
         var local = _data;
         var result = 0;
 
-        foreach (var kvp in local)
+        foreach (var key in local.Keys)
         {
-            result = kvp.Key + kvp.Value;
+            result = key + local[key];
         }
 
         return result;
     }
 
     [Benchmark]
-    public int DeconstructIteration()
+    public int Deconstruct()
     {
         var local = _data;
         var result = 0;
