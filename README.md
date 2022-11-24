@@ -27,6 +27,8 @@ Not all benchmarks may be listed, check source directly.
   comparing approaches to format string in combination of `string.Substring`
 - [Throw or return](src/Benchmarkator/Exceptions/ThrowOrReturn.md):
   demonstrating price of throwing an exception
+- [Reading country code from culture string](src/Benchmarkator/Stringator/CultureStringSlicator.md):
+  what's the fastest way to read country code from culture string?
 
 #### Collection benchmarks
 
