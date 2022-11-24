@@ -14,10 +14,13 @@ public class AddToCollection
 {
     private int[] _data = null!;
 
+    [Params(4, 64, 128)]
+    public int Size { get; set; }
+
     [GlobalSetup]
     public void GlobalSetup()
     {
-        _data = ValuesGenerator.Instance.GenerateUniqueValues<int>(128);
+        _data = ValuesGenerator.Instance.GenerateUniqueValues<int>(Size);
     }
 
     [Benchmark(Baseline = true)]
@@ -47,6 +50,22 @@ public class AddToCollection
         foreach (var value in data)
         {
             list.Add(value);
+        }
+
+        return list;
+    }
+
+    [Benchmark]
+    [BenchmarkCategory("List")]
+    public LinkedList<int> AddToLinkedList()
+    {
+        var data = _data;
+        var list = new LinkedList<int>();
+
+        // ReSharper disable once LoopCanBeConvertedToQuery
+        foreach (var value in data)
+        {
+            list.AddLast(value);
         }
 
         return list;
