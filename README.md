@@ -64,6 +64,8 @@ Not all benchmarks may be listed, check source directly.
   benchmark comparing performance of `.ToArray()` and `.ToList()`
 - [Creating `Dictionary<,>` from collection](src/Benchmarkator.Collections/ToCollection/ToDictionary.md):
   benchmark of creating dictionary out of collection using LINQ and simple implementation
+- [Codebook lookup](src/Benchmarkator.Collections/Lookup/CodebookLookup.md):
+  different ways of looking up value in short codebook
 
 #### JSON
 
