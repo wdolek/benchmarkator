@@ -29,6 +29,8 @@ Not all benchmarks may be listed, check source directly.
   demonstrating price of throwing an exception
 - [Reading country code from culture string](src/Benchmarkator/Stringator/CultureStringSlicator.md):
   what's the fastest way to read country code from culture string?
+- [Comparing two strings](src/Benchmarkator/Stringator/StringEqualizator.md):
+  comparing `==` operator and `string.Equals` method
 
 #### Collection benchmarks
 
