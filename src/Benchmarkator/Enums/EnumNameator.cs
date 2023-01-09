@@ -60,7 +60,7 @@ public class EnumNameator
         Fifty,
     }
 
-    private Number[] _enums;
+    private Number[] _enums = null!;
 
     [GlobalSetup]
     public void Setup()
