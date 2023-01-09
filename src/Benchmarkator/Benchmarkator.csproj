@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Benchmarkator.Collections\Benchmarkator.Collections.csproj" />
+    <ProjectReference Include="..\Benchmarkator.Http\Benchmarkator.Http.csproj" />
     <ProjectReference Include="..\Benchmarkator.Json\Benchmarkator.Json.csproj" />
     <ProjectReference Include="..\Benchmarkator.MongoDb\Benchmarkator.MongoDb.csproj" />
   </ItemGroup>

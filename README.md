@@ -69,6 +69,11 @@ Not all benchmarks may be listed, check source directly.
 - [Codebook lookup](src/Benchmarkator.Collections/Lookup/CodebookLookup.md):
   different ways of looking up value in short codebook
 
+#### HTTP
+
+- [Creating/parsing `AuthorizationHeaderValue`](src/Benchmarkator.Http/AuthHeaderValueParsator/ParseAuthHeaderValue.md):
+  comparing performance of parsing authorization header value or using ctor
+
 #### JSON
 
 - [JSON Deserialization](src/Benchmarkator.Json/Deserialization/JsonPayloadDeserialization.md):

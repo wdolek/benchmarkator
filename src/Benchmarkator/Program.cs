@@ -11,6 +11,7 @@ class Program
             {
                     typeof(Program).Assembly,
                     Assembly.Load("Benchmarkator.Collections"),
+                    Assembly.Load("Benchmarkator.Http"),
                     Assembly.Load("Benchmarkator.Json"),
                     Assembly.Load("Benchmarkator.MongoDb")
             })
