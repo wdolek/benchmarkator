@@ -21,6 +21,8 @@ Not all benchmarks may be listed, check source directly.
   comparing modulo with logical AND when dividing by even number
 - [Using lambdas](src/Benchmarkator/Lambdinator/LambdaUsage.md):
   comparing different ways how to write lambdas/anonymous functions
+- [String builder append](src/Benchmarkator/Stringator/StringBuilderAppendator.md):
+  comparing `StringBuilder.Append` when concatenating simple string
 - [String concatenation](src/Benchmarkator/Stringator/StringConcat.md):
   simple concat of two strings
 - [Formatting string while rendering just part of it](src/Benchmarkator/Stringator/StringFormatSubstring.md):
